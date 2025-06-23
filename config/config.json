@@ -1,0 +1,41 @@
+{
+  "workers": [
+    {
+      "role": "mapper",
+      "address": "localhost:9001"
+    },
+    {
+      "role": "mapper",
+      "address": "localhost:9002"
+    },
+    {
+      "role": "mapper",
+      "address": "localhost:9003"
+    },
+    {
+      "role": "mapper",
+      "address": "localhost:9004"
+    },
+    {
+      "role": "reducer",
+      "address": "localhost:9005"
+    },
+    {
+      "role": "reducer",
+      "address": "localhost:9006"
+    },
+    {
+      "role": "reducer",
+      "address": "localhost:9007"
+    },
+    {
+      "role": "reducer",
+      "address": "localhost:9008"
+    }
+  ],
+  "settings": {
+    "xi": 1,
+    "xf": 50,
+    "count": 100
+  }
+}
