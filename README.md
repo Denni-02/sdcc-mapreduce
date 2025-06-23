@@ -50,6 +50,11 @@ go run ./master
 - I reducer scrivono output parziale in `output/temp_<address>.txt`
 - Il master unisce tutto in `output/final_output.txt`
 
+## Strategia partizionamento
+
+- Per bilanciare il carico tra i reducer il master esegue un sampling del 10% del dataset (per evitare di gestire troppi dati e annullare i benefici del map/reduce)
+- Il sample viene ordinato e si estraggono N-1 cut point equidistanti nel sample per generare N intervalli
+
 ## Requisiti
 
 - Go ≥ 1.20

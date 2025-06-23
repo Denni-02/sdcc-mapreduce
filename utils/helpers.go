@@ -27,7 +27,6 @@ type ReduceRequest struct {
 }
 
 type ReduceReply struct {
-	//SortedData []int // Dati ordinati restituiti dal reducer
 	Ack bool
 }
 
@@ -65,13 +64,6 @@ func LoadConfig(path string) Config {
 	}
 
 	return config
-}
-
-// Funzione per gestire errori
-func CheckError(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
 }
 
 // Funzione per inviare i numeri ordinati al reducer appropriato

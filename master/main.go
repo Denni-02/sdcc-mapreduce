@@ -5,6 +5,7 @@ import (
 	"sdcc-mapreduce/utils"
 )
 
+// Coordina l'intero flusso MapReduce: generazione dati, assegnazione task, raccolta risultati.
 func main() {
 
 	// Pulizia dei file di output precedenti
@@ -32,9 +33,6 @@ func main() {
 
 	// Fase di Map
 	master.ExecuteMapPhase(chunks, reducerRanges)
-
-	// Fase di Reduce
-	//master.ExecuteReducePhase()
 
 	// Combina i risultati finali
 	master.CombineOutputFiles()

@@ -18,8 +18,8 @@ type Worker struct{}
 
 // Esegue il task di Map: ordina il chunk di numeri ricevuto e lo invia ai reducer appropriati
 func (Worker) MapTask(req utils.MapRequest, reply *utils.MapReply) error {
-	numbers := req.Chunk
-	reducerRanges := req.ReducerRanges
+	numbers := req.Chunk               // chunk da elaborare
+	reducerRanges := req.ReducerRanges // // Mappa {reducer address --> [min, max]}
 	fmt.Printf("Mapper ha ricevuto il chunk: %v\n", numbers)
 
 	// Ordina localmente il chunk
@@ -27,7 +27,7 @@ func (Worker) MapTask(req utils.MapRequest, reply *utils.MapReply) error {
 	fmt.Printf("Chunk ordinato: %v\n", numbers)
 
 	// Distribuisce i numeri ordinati ai reducer appropriati
-	var v = make(map[string][]int)
+	var v = make(map[string][]int) // Mappa {reducer --> []numeri da inviare}
 	for _, num := range numbers {
 		assigned := false
 		for address, bounds := range reducerRanges {
@@ -42,6 +42,7 @@ func (Worker) MapTask(req utils.MapRequest, reply *utils.MapReply) error {
 		}
 	}
 
+	// Invia i sotto-chunk ordinati ai rispettivi reducer via RPC
 	for address := range v {
 		fmt.Printf("Invio il sotto-chunck %v al mapper %s\n", v[address], address)
 		err := utils.SendToReducer(v[address], address)
@@ -61,13 +62,9 @@ func (Worker) ReduceTask(req utils.ReduceRequest, reply *utils.ReduceReply) erro
 
 	fmt.Printf("\nReducer ha ricevuto i seguenti chunk: %v\n", req.Chunks)
 
-	// Unisce e ordina i chunk ricevuti
-
 	// Nome univoco del file temporaneo basato sull'indirizzo del reducer
 	workerAddress := flag.Lookup("address").Value.String()
-	sanitizedAddress := strings.ReplaceAll(workerAddress, ":", "_") // Sostituisce i ":" con "_"
-
-	// Nome univoco del file temporaneo
+	sanitizedAddress := strings.ReplaceAll(workerAddress, ":", "_")     // Sostituisce i ":" con "_"
 	tempFileName := fmt.Sprintf("output/temp_%s.txt", sanitizedAddress) // Torna alla directory principale
 
 	// Scrive nel file temporaneo
@@ -78,6 +75,7 @@ func (Worker) ReduceTask(req utils.ReduceRequest, reply *utils.ReduceReply) erro
 	fmt.Printf("Scrivo nel file temporaneo: %s\n", tempFileName)
 	defer file.Close()
 
+	// Scrive ogni numero ricevuto in una nuova riga del file
 	writer := bufio.NewWriter(file)
 	for _, num := range req.Chunks {
 		writer.WriteString(fmt.Sprintf("%d\n", num))
@@ -86,6 +84,7 @@ func (Worker) ReduceTask(req utils.ReduceRequest, reply *utils.ReduceReply) erro
 
 	fmt.Printf("Reducer ha scritto i risultati nel file: %s\n", tempFileName)
 
+	// Invio ACK al master
 	reply.Ack = true
 	return nil
 }
