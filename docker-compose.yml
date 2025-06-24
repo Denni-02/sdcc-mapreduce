@@ -1,0 +1,138 @@
+version: "3.9"
+
+services:
+  master:
+    build:
+      context: .
+      dockerfile: master/Dockerfile
+    container_name: master
+    depends_on:
+      - mapper1
+      - mapper2
+      - mapper3
+      - mapper4
+      - reducer5
+      - reducer6
+      - reducer7
+      - reducer8
+    volumes:
+      - ./data:/app/data
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+  mapper1:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: mapper1
+    hostname: mapper1
+    environment:
+      - ROLE=mapper
+      - ID=1
+    volumes:
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+  mapper2:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: mapper2
+    hostname: mapper2
+    environment:
+      - ROLE=mapper
+      - ID=2
+    volumes:
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+  mapper3:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: mapper3
+    hostname: mapper3
+    environment:
+      - ROLE=mapper
+      - ID=3
+    volumes:
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+  mapper4:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: mapper4
+    hostname: mapper4
+    environment:
+      - ROLE=mapper
+      - ID=4
+    volumes:
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+  reducer5:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: reducer5
+    hostname: reducer5
+    environment:
+      - ROLE=reducer
+      - ID=5
+    volumes:
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+  reducer6:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: reducer6
+    hostname: reducer6
+    environment:
+      - ROLE=reducer
+      - ID=6
+    volumes:
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+  reducer7:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: reducer7
+    hostname: reducer7
+    environment:
+      - ROLE=reducer
+      - ID=7
+    volumes:
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+  reducer8:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: reducer8
+    hostname: reducer8
+    environment:
+      - ROLE=reducer
+      - ID=8
+    volumes:
+      - ./output:/app/output
+    networks:
+      - mapreduce-net
+
+networks:
+  mapreduce-net:
+    driver: bridge

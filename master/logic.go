@@ -81,7 +81,7 @@ func (m *Master) MapReducersToRanges(data []int) map[string][2]int {
 			lower = m.Settings.Xi
 			upper = ranges[0]
 		} else if i == numReducers-1 { // Ultimo reducer: dall'ultimo range fino a xf
-			upper = m.Settings.Xf
+			upper = m.Settings.Xf + 1
 			lower = ranges[i-1]
 		} else { // Reducer intermedi
 			lower = ranges[i-1]

@@ -4,6 +4,7 @@ Progetto per il corso **Sistemi Distribuiti e Cloud Computing (SDCC)**, a.a. 202
 
 Il progetto implementa un sistema distribuito di ordinamento basato sul paradigma **MapReduce**, scritto in **Go**, con comunicazione via **RPC**, e organizzato in **master**, **mapper** e **reducer**.
 
+Tutte le componenti sono containerizzate con **Docker** e orchestrate tramite **Docker Compose**.
 
 ## Come eseguire il progetto (per ora solo in locale)
 
@@ -16,36 +17,15 @@ Imposta i parametri del sistema:
 - `count`: quantità totale di numeri casuali da generare
 - `workers`: lista dei worker, ognuno con:
   - `role`: `"mapper"` o `"reducer"`
-  - `address`: es. `"localhost:9001"`
+  - `address`: devono combaciare con i nomi host definiti in `docker-compose.yml`!
 
-### 2. Inizializza il modulo Go
-
-Se non l'hai già fatto:
+### 3. Avvia il sistema completo
 
 ```bash
-go mod init sdcc-mapreduce
-go mod tidy
-```
-### 3. Avvia i worker (in terminali separati)
-
-Esegui tanti worker quanti ne hai definiti nel config.json:
-
-```bash
-go run worker/main.go --address=localhost:9001
-go run worker/main.go --address=localhost:9002
-go run worker/main.go --address=localhost:9003
-…
+./script/run.sh
 ```
 
-### 4. Avvia il master
-
-Nel terminale principale (dalla root del progetto):
-
-```bash
-go run ./master
-```
-
-### 5. Verifica output
+### 4. Verifica output
 
 - I reducer scrivono output parziale in `output/temp_<address>.txt`
 - Il master unisce tutto in `output/final_output.txt`
@@ -57,8 +37,8 @@ go run ./master
 
 ## Requisiti
 
-- Go ≥ 1.20
-- Ambiente locale (nessun container richiesto per ora)
+- Docker & Docker Compose installati (es. Docker Desktop)
+- Go ≥ 1.20 solo per sviluppo, non per esecuzione
 
 ## Autore
 

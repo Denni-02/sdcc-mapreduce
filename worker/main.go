@@ -31,7 +31,7 @@ func (Worker) MapTask(req utils.MapRequest, reply *utils.MapReply) error {
 	for _, num := range numbers {
 		assigned := false
 		for address, bounds := range reducerRanges {
-			if num >= bounds[0] && num <= bounds[1] {
+			if num >= bounds[0] && num < bounds[1] {
 				v[address] = append(v[address], num)
 				assigned = true
 				break
@@ -62,10 +62,16 @@ func (Worker) ReduceTask(req utils.ReduceRequest, reply *utils.ReduceReply) erro
 
 	fmt.Printf("\nReducer ha ricevuto i seguenti chunk: %v\n", req.Chunks)
 
-	// Nome univoco del file temporaneo basato sull'indirizzo del reducer
-	workerAddress := flag.Lookup("address").Value.String()
-	sanitizedAddress := strings.ReplaceAll(workerAddress, ":", "_")     // Sostituisce i ":" con "_"
-	tempFileName := fmt.Sprintf("output/temp_%s.txt", sanitizedAddress) // Torna alla directory principale
+	host, _ := os.Hostname()
+	port := flag.Lookup("address").Value.String()
+	split := strings.Split(port, ":")
+	if len(split) > 1 {
+		port = split[1]
+	} else {
+		port = "9000"
+	}
+	tempFileName := fmt.Sprintf("output/temp_%s_%s.txt", host, port)
+
 
 	// Scrive nel file temporaneo
 	file, err := os.OpenFile(tempFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
