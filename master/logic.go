@@ -15,11 +15,47 @@ import (
 	"time"
 )
 
+// ========================================================================================
+// Struct Master 
+// ========================================================================================
+
 // Master rappresenta il nodo centrale che coordina le fasi di Map e Reduce
 type Master struct {
 	Workers  []utils.WorkerConfig // Lista dei worker (mappers e reducers)
 	Settings utils.Settings       // Parametri generali del sistema
 }
+
+// ========================================================================================
+// Recupero Mapper e Reducer da config
+// ========================================================================================
+
+// Recupera solo i mapper
+func (m *Master) getMappers() (mappers []utils.WorkerConfig, numMappers int) {
+	numMappers = 0
+	for _, worker := range m.Workers {
+		if worker.Role == "mapper" {
+			mappers = append(mappers, worker)
+			numMappers++
+		}
+	}
+	return
+}
+
+// Recupera solo i reducer
+func (m *Master) getReducers() (reducers []utils.WorkerConfig, numReducers int) {
+	numReducers = 0
+	for _, worker := range m.Workers {
+		if worker.Role == "reducer" {
+			reducers = append(reducers, worker)
+			numReducers++
+		}
+	}
+	return
+}
+
+// ========================================================================================
+// Generazione, Suddivisione e Sampling dati
+// ========================================================================================
 
 // Genera count numeri casuali nel range [xi, xf]
 func (m *Master) GenerateData(count, xi, xf int) []int {
@@ -46,6 +82,18 @@ func (m *Master) SplitData(data []int) [][]int {
 	}
 	return chunks
 }
+
+// Rimescola casualmente la slice fornita
+func shuffle(slice []int) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano())) // Crea un'istanza di rand con un seed
+	r.Shuffle(len(slice), func(i, j int) {
+		slice[i], slice[j] = slice[j], slice[i]
+	})
+}
+
+// ========================================================================================
+// Logica e Fase MAP
+// ========================================================================================
 
 // Assegna a ciascun reducer un intervallo [min, max] di valori e usa sampling per definire range bilanciati
 func (m *Master) MapReducersToRanges(data []int) map[string][2]int {
@@ -94,14 +142,6 @@ func (m *Master) MapReducersToRanges(data []int) map[string][2]int {
 	return reducerRanges
 }
 
-// Rimescola casualmente la slice fornita
-func shuffle(slice []int) {
-	r := rand.New(rand.NewSource(time.Now().UnixNano())) // Crea un'istanza di rand con un seed
-	r.Shuffle(len(slice), func(i, j int) {
-		slice[i], slice[j] = slice[j], slice[i]
-	})
-}
-
 // Ordina il sample e ritorna N−1 punti di taglio per N reducer
 func createBalancedRanges(sample []int, numReducers int) []int {
 
@@ -119,30 +159,6 @@ func createBalancedRanges(sample []int, numReducers int) []int {
 
 	fmt.Printf("ranges= %v\n", ranges)
 	return ranges
-}
-
-// Recupera solo i mapper
-func (m *Master) getMappers() (mappers []utils.WorkerConfig, numMappers int) {
-	numMappers = 0
-	for _, worker := range m.Workers {
-		if worker.Role == "mapper" {
-			mappers = append(mappers, worker)
-			numMappers++
-		}
-	}
-	return
-}
-
-// Recupera solo i reducer
-func (m *Master) getReducers() (reducers []utils.WorkerConfig, numReducers int) {
-	numReducers = 0
-	for _, worker := range m.Workers {
-		if worker.Role == "reducer" {
-			reducers = append(reducers, worker)
-			numReducers++
-		}
-	}
-	return
 }
 
 // Assegna i chunk ai mapper e coordina le chiamate RPC
@@ -174,6 +190,10 @@ func (m *Master) ExecuteMapPhase(chunks [][]int, reducerRanges map[string][2]int
 	wg.Wait() // Attende che tutte le goroutine abbiano completato
 	fmt.Println("Fase di Map completata.")
 }
+
+// ========================================================================================
+// Combinazione output
+// ========================================================================================
 
 // Combina i file di output dei reducer
 func (m *Master) CombineOutputFiles() {
