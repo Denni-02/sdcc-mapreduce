@@ -1,117 +1,55 @@
 package main
 
 import (
-	"bufio"
 	"flag"
-	"fmt"
 	"log"
+	"fmt"
 	"net"
 	"net/rpc"
-	"os"
 	"sdcc-mapreduce/utils"
-	"sort"
-	"strings"
 )
 
-// Worker gestisce i task di Map e Reduce
-type Worker struct{}
-
-// Esegue il task di Map: ordina il chunk di numeri ricevuto e lo invia ai reducer appropriati
-func (Worker) MapTask(req utils.MapRequest, reply *utils.MapReply) error {
-	numbers := req.Chunk               // chunk da elaborare
-	reducerRanges := req.ReducerRanges // // Mappa {reducer address --> [min, max]}
-	fmt.Printf("Mapper ha ricevuto il chunk: %v\n", numbers)
-
-	// Ordina localmente il chunk
-	sort.Ints(numbers)
-	fmt.Printf("Chunk ordinato: %v\n", numbers)
-
-	// Distribuisce i numeri ordinati ai reducer appropriati
-	var v = make(map[string][]int) // Mappa {reducer --> []numeri da inviare}
-	for _, num := range numbers {
-		assigned := false
-		for address, bounds := range reducerRanges {
-			if num >= bounds[0] && num < bounds[1] {
-				v[address] = append(v[address], num)
-				assigned = true
-				break
-			}
-		}
-		if !assigned {
-			fmt.Printf("Errore: numero %d non assegnato a nessun reducer!\n", num)
-		}
-	}
-
-	// Invia i sotto-chunk ordinati ai rispettivi reducer via RPC
-	for address := range v {
-		fmt.Printf("Invio il sotto-chunck %v al mapper %s\n", v[address], address)
-		err := utils.SendToReducer(v[address], address)
-		if err != nil {
-			log.Printf("Errore nell'invio al reducer %s: %v\n", address, err)
-			continue
-		}
-	}
-
-	// Invia un ACK al master
-	reply.Ack = true
-	return nil
-}
-
-// Esegue task di Reduce
-func (Worker) ReduceTask(req utils.ReduceRequest, reply *utils.ReduceReply) error {
-
-	fmt.Printf("\nReducer ha ricevuto i seguenti chunk: %v\n", req.Chunks)
-
-	host, _ := os.Hostname()
-	port := flag.Lookup("address").Value.String()
-	split := strings.Split(port, ":")
-	if len(split) > 1 {
-		port = split[1]
-	} else {
-		port = "9000"
-	}
-	tempFileName := fmt.Sprintf("output/temp_%s_%s.txt", host, port)
-
-
-	// Scrive nel file temporaneo
-	file, err := os.OpenFile(tempFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Fatalf("Errore nell'apertura del file temporaneo %s: %v", tempFileName, err)
-	}
-	fmt.Printf("Scrivo nel file temporaneo: %s\n", tempFileName)
-	defer file.Close()
-
-	// Scrive ogni numero ricevuto in una nuova riga del file
-	writer := bufio.NewWriter(file)
-	for _, num := range req.Chunks {
-		writer.WriteString(fmt.Sprintf("%d\n", num))
-	}
-	writer.Flush()
-
-	fmt.Printf("Reducer ha scritto i risultati nel file: %s\n", tempFileName)
-
-	// Invio ACK al master
-	reply.Ack = true
-	return nil
-}
-
 func main() {
+
+	// Recupera eventuali panic ed evita che il worker muoia silenziosamente
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf("Panic catturato: %v\n", r)
+			utils.AppendToFile("/app/log/log_worker/worker_crash.log", fmt.Sprintf("Panic: %v\n", r))
+		}
+	}()
+
 	// Flag per specificare indirizzo e porta dalla linea di comando
 	address := flag.String("address", "localhost:9001", "Indirizzo e porta del worker (es. localhost:9001)")
 	flag.Parse()
 
+	// Inizializza logger: restituisce anche il file per il defer
+	logFileName := "/app/log/log_worker/worker_" + utils.SanitizeAddr(*address) + ".log"
+	logger, file, err := utils.SetupLogger(logFileName, "[WORKER] ")
+	if err != nil {
+		log.Fatalf("Errore inizializzazione logger: %v", err)
+	}
+	defer file.Close()
+	log.SetOutput(file) 
+	log.SetFlags(logger.Flags())      
+	log.SetPrefix(logger.Prefix())
+
+	// Crea una nuova istanza del worker che implementa i metodi RPC
 	worker := new(Worker)
 	server := rpc.NewServer()
-	err := server.Register(worker)
+	err = server.Register(worker)
 	if err != nil {
 		log.Fatalf("Errore nella registrazione del worker: %v", err)
 	}
 
+	// Crea un listener TCP sull'indirizzo specificato
 	listener, err := net.Listen("tcp", *address)
 	if err != nil {
 		log.Fatalf("Errore nell'ascolto su %s: %v", *address, err)
 	}
 
+	// Accetta le connessioni in arrivo e serve le richieste RPC
 	log.Printf("Worker in ascolto su %s\n", *address)
 	server.Accept(listener)
 }
+

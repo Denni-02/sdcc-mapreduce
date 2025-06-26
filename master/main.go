@@ -1,15 +1,27 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"sdcc-mapreduce/utils"
 )
 
 // Coordina l'intero flusso MapReduce: generazione dati, assegnazione task, raccolta risultati.
 func main() {
 
+	// Logger master
+	logger, file, err := utils.SetupLogger("/app/log/log_master/master.log", "[MASTER] ")
+	if err != nil {
+		log.Fatalf("Errore logger master: %v", err)
+	}
+	defer file.Close()
+	log.SetOutput(file)
+	log.SetFlags(logger.Flags())
+	log.SetPrefix(logger.Prefix())
+
+
 	// Pulizia dei file di output precedenti
-	utils.CleanupFiles()
+	utils.ClearOutputDir()
+	utils.CleanupOutputFiles()
 
 	// Carica la configurazione dal file config.json
 	config := utils.LoadConfig("config/config.json")
@@ -22,11 +34,11 @@ func main() {
 
 	// Genera i dati casuali
 	data := master.GenerateData(config.Settings.Count, config.Settings.Xi, config.Settings.Xf)
-	fmt.Printf("\n\nNumeri generati: %v\n\n", data)
+	log.Printf("\n\nNumeri generati: %v\n\n", data)
 
 	// Suddivide i dati in chunk
 	chunks := master.SplitData(data)
-	fmt.Printf("Chunk distribuiti ai mapper: %v\n\n", chunks)
+	log.Printf("Chunk distribuiti ai mapper: %v\n\n", chunks)
 
 	// Mappa i reducer agli intervalli di competenza
 	reducerRanges := master.MapReducersToRanges(data)

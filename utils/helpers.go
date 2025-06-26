@@ -22,8 +22,9 @@ type MapReply struct {
 
 // ReduceRequest e ReduceReply per la fase di Reduce
 type ReduceRequest struct {
-	Chunks        []int  `json:"chunks"`
-	WorkerAddress string `json:"workerAddress"` // Aggiungi l'indirizzo del reducer
+   Chunks        []int  `json:"chunks"`
+   WorkerAddress string `json:"workerAddress"` 
+   Owner         string `json:"owner"`         
 }
 
 type ReduceReply struct {

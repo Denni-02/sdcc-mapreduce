@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN go build -o worker_bin ./worker/main.go
+RUN go build -o worker_bin ./worker          
 
 CMD ["sh", "-c", "./worker_bin --address=${HOSTNAME}:900$ID"]
 

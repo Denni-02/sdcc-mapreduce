@@ -6,7 +6,6 @@ import (
 	"log"
 	"math"
 	"math/rand"
-	"net/rpc"
 	"os"
 	"sdcc-mapreduce/utils"
 	"sort"
@@ -115,11 +114,11 @@ func (m *Master) MapReducersToRanges(data []int) map[string][2]int {
 	} else {
 		sample = data[0:numReducers] // se ha pochi dati almeno un valore per reducer
 	}
-	fmt.Printf("sample = %v\n", sample)
+	log.Printf("sample = %v\n", sample)
 
 	// Crea intervalli bilanciat in base al sample
 	ranges := createBalancedRanges(sample, numReducers)
-	fmt.Printf("ranges = %v\n", ranges)
+	log.Printf("ranges = %v\n", ranges)
 
 	for i, reducer := range reducers {
 		var lower int
@@ -137,7 +136,7 @@ func (m *Master) MapReducersToRanges(data []int) map[string][2]int {
 		}
 
 		reducerRanges[reducer.Address] = [2]int{lower, upper}
-		fmt.Printf("Reducer %s gestisce l'intervallo [%d, %d]\n", reducer.Address, lower, upper)
+		log.Printf("Reducer %s gestisce l'intervallo [%d, %d]\n", reducer.Address, lower, upper)
 	}
 	return reducerRanges
 }
@@ -147,7 +146,7 @@ func createBalancedRanges(sample []int, numReducers int) []int {
 
 	// Ordina il sample, così puoi dividerlo in ordine crescente
 	sort.Ints(sample)
-	fmt.Printf("sample ordinato= %v\n", sample)
+	log.Printf("sample ordinato= %v\n", sample)
 
 	// Prepara una slice per gli N−1 punti di separazione
 	ranges := make([]int, numReducers-1)
@@ -157,38 +156,47 @@ func createBalancedRanges(sample []int, numReducers int) []int {
 		ranges[i] = sample[i*(len(sample)/numReducers)]
 	}
 
-	fmt.Printf("ranges= %v\n", ranges)
+	log.Printf("ranges= %v\n", ranges)
 	return ranges
 }
 
-// Assegna i chunk ai mapper e coordina le chiamate RPC
+// Esegue la fase di Map assegnando ogni chunk di dati a un mapper disponibile
 func (m *Master) ExecuteMapPhase(chunks [][]int, reducerRanges map[string][2]int) {
-	var wg sync.WaitGroup        // Sincronizza tutte le goroutine
-	mappers, _ := m.getMappers() // Recupera i mapper disponibili
+	
+	var wg sync.WaitGroup // WaitGroup per sincronizzare le goroutine
+	mappers, _ := m.getMappers() // Recupera la lista dei mapper dal maste
+
+	// Mappa per tenere traccia dei mapper occupati con mutex per accesso concorrente
+	busy := make(map[string]bool)
+	var mu sync.Mutex
 
 	for i, chunk := range chunks {
 		wg.Add(1)
-		go func(mapper utils.WorkerConfig, chunk []int) {
+		go func(chunkIndex int, chunk []int) {
 			defer wg.Done()
-			// Connessione RPC al mapper
-			client, err := rpc.Dial("tcp", mapper.Address)
-			if err != nil {
-				log.Fatalf("Errore di connessione al mapper %s: %v", mapper.Address, err)
+
+			req := utils.MapRequest{
+				Chunk: chunk, // Chunk di interi da ordinare
+				ReducerRanges: reducerRanges,  // Intervalli di valori per ogni reducer
 			}
-			defer client.Close()
-			// Costruzione della richiesta Map
-			req := utils.MapRequest{Chunk: chunk, ReducerRanges: reducerRanges}
-			reply := utils.MapReply{}
-			// Invoca il metodo remoto MapTask sul mapper
-			err = client.Call("Worker.MapTask", req, &reply)
+			reply := utils.MapReply{} // Struttura di risposta RPC
+
+			logPrefix := fmt.Sprintf("MAP-%02d", chunkIndex)
+			taskLabel := fmt.Sprintf("chunk %d --> %v", chunkIndex, chunk)
+			
+			// Chiamata RPC con fallback: tenta mapper disponibili e riassegna in caso di fallimento
+			busyMap := &utils.ThreadSafeMap{Data: busy, Mu: &mu}
+			err := CallWithFallbackMapBusy(mappers, "Worker.MapTask", req, &reply, logPrefix, taskLabel, busyMap)
+
 			if err != nil {
-				log.Fatalf("Errore nell'esecuzione del MapTask: %v", err)
+				log.Printf("%s fallito: %v\n", logPrefix, err)
+			} else {
+				log.Printf("%s completato\n", logPrefix)
 			}
-			fmt.Printf("Mapper %s ha completato l'elaborazione del chunk %v\n", mapper.Address, chunk)
-		}(mappers[i%len(mappers)], chunk) // Distribuisce i chunk in round-robin tra i mapper
+		}(i, chunk)
 	}
-	wg.Wait() // Attende che tutte le goroutine abbiano completato
-	fmt.Println("Fase di Map completata.")
+	wg.Wait()
+	log.Println("Fase di Map completata.")
 }
 
 // ========================================================================================
@@ -208,21 +216,28 @@ func (m *Master) CombineOutputFiles() {
 	writer := bufio.NewWriter(file)
 	reducers, _ := m.getReducers()
 
-	// Unisce i file in ordine
+	/// Unisce i file in ordine
 	for _, reducer := range reducers {
-
 		tempFile := fmt.Sprintf("output/temp_%s.txt", strings.ReplaceAll(reducer.Address, ":", "_"))
-		fmt.Printf("Unisco il file temporaneo: %s\n", tempFile)
+		log.Printf("Unisco il file temporaneo: %s\n", tempFile)
 
-		if _, err := os.Stat(tempFile); os.IsNotExist(err) {
-			log.Printf("Errore: il file %s non esiste.\n", tempFile)
-			continue
+		// Attende che il file sia pronto (polling ogni 500ms, max 5s)
+		waited := 0
+		for {
+			if _, err := os.Stat(tempFile); err == nil {
+				break // trovato
+			}
+			if waited >= 10 {
+				continue 
+			}
+			time.Sleep(500 * time.Millisecond)
+			waited++
 		}
 
 		content, err := os.ReadFile(tempFile)
 		if err != nil {
 			log.Printf("Errore nella lettura del file %s: %v", tempFile, err)
-			continue
+			continue // anche qui, invece di goto
 		}
 
 		writer.Write(content)
@@ -230,5 +245,6 @@ func (m *Master) CombineOutputFiles() {
 	}
 
 	writer.Flush()
-	fmt.Printf("Output finale scritto in: %s\n", outputFile)
+	log.Printf("Output finale scritto in: %s\n", outputFile)
 }
+

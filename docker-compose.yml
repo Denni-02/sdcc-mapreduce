@@ -18,6 +18,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./output:/app/output
+      - ./log/log_master:/app/log/log_master
     networks:
       - mapreduce-net
 
@@ -32,6 +33,7 @@ services:
       - ID=1
     volumes:
       - ./output:/app/output
+      - ./log/log_worker:/app/log/log_worker
     networks:
       - mapreduce-net
 
@@ -46,6 +48,7 @@ services:
       - ID=2
     volumes:
       - ./output:/app/output
+      - ./log/log_worker:/app/log/log_worker
     networks:
       - mapreduce-net
 
@@ -60,6 +63,7 @@ services:
       - ID=3
     volumes:
       - ./output:/app/output
+      - ./log/log_worker:/app/log/log_worker
     networks:
       - mapreduce-net
 
@@ -74,6 +78,7 @@ services:
       - ID=4
     volumes:
       - ./output:/app/output
+      - ./log/log_worker:/app/log/log_worker
     networks:
       - mapreduce-net
 
@@ -88,6 +93,7 @@ services:
       - ID=5
     volumes:
       - ./output:/app/output
+      - ./log/log_worker:/app/log/log_worker
     networks:
       - mapreduce-net
 
@@ -102,6 +108,7 @@ services:
       - ID=6
     volumes:
       - ./output:/app/output
+      - ./log/log_worker:/app/log/log_worker
     networks:
       - mapreduce-net
 
@@ -116,6 +123,7 @@ services:
       - ID=7
     volumes:
       - ./output:/app/output
+      - ./log/log_worker:/app/log/log_worker
     networks:
       - mapreduce-net
 
@@ -130,6 +138,7 @@ services:
       - ID=8
     volumes:
       - ./output:/app/output
+      - ./log/log_worker:/app/log/log_worker
     networks:
       - mapreduce-net
 
