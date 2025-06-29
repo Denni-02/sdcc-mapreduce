@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"sdcc-mapreduce/utils"
+        "os"
 )
 
 // Coordina l'intero flusso MapReduce: generazione dati, assegnazione task, raccolta risultati.
@@ -48,4 +49,5 @@ func main() {
 
 	// Combina i risultati finali
 	master.CombineOutputFiles()
+        os.Exit(0)
 }

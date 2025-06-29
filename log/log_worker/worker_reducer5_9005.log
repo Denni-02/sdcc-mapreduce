@@ -165,3 +165,59 @@ Reducer ha ricevuto i seguenti chunk: [3 3 4 5 5 5 6 6] per Owner reducer6:9006
 [WORKER] 2025/06/26 17:32:15 
 Reducer ha ricevuto i seguenti chunk: [3 3] per Owner reducer6:9006
 [WORKER] 2025/06/26 17:32:15 Reducer ha scritto i risultati in: output/temp_reducer6_9006.txt
+[WORKER] 2025/06/27 13:40:31 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/27 13:40:37 
+Reducer ha ricevuto i seguenti chunk: [3 4] per Owner reducer5:9005
+[WORKER] 2025/06/27 13:40:37 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/27 13:40:37 
+Reducer ha ricevuto i seguenti chunk: [1 2 3 3 3] per Owner reducer5:9005
+[WORKER] 2025/06/27 13:40:37 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/27 13:40:37 
+Reducer ha ricevuto i seguenti chunk: [1 3 4] per Owner reducer5:9005
+[WORKER] 2025/06/27 13:40:37 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/27 13:40:37 
+Reducer ha ricevuto i seguenti chunk: [1] per Owner reducer5:9005
+[WORKER] 2025/06/27 13:40:37 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 15:39:17 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 15:39:22 
+Reducer ha ricevuto i seguenti chunk: [1 1 2] per Owner reducer5:9005
+[WORKER] 2025/06/28 15:39:22 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 15:39:22 
+Reducer ha ricevuto i seguenti chunk: [1] per Owner reducer5:9005
+[WORKER] 2025/06/28 15:39:22 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 15:39:22 
+Reducer ha ricevuto i seguenti chunk: [1 1] per Owner reducer5:9005
+[WORKER] 2025/06/28 15:39:22 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 15:42:16 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 15:42:55 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:03:20 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:11:21 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:11:27 
+Reducer ha ricevuto i seguenti chunk: [4 5] per Owner reducer5:9005
+[WORKER] 2025/06/28 16:11:27 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 16:11:27 
+Reducer ha ricevuto i seguenti chunk: [1] per Owner reducer5:9005
+[WORKER] 2025/06/28 16:11:27 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 16:11:27 
+Reducer ha ricevuto i seguenti chunk: [2] per Owner reducer5:9005
+[WORKER] 2025/06/28 16:11:27 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 16:11:27 
+Reducer ha ricevuto i seguenti chunk: [1 4 5 6] per Owner reducer5:9005
+[WORKER] 2025/06/28 16:11:27 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 16:34:13 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:34:19 
+Reducer ha ricevuto i seguenti chunk: [1] per Owner reducer5:9005
+[WORKER] 2025/06/28 16:34:19 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 16:34:19 
+Reducer ha ricevuto i seguenti chunk: [1] per Owner reducer5:9005
+[WORKER] 2025/06/28 16:34:19 Reducer ha scritto i risultati in: output/temp_reducer5_9005.txt
+[WORKER] 2025/06/28 16:37:40 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:40:54 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:42:08 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:43:23 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:44:39 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:50:15 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:51:30 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:52:46 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/28 16:54:02 Worker in ascolto su reducer5:9005
+[WORKER] 2025/06/29 07:19:45 Worker in ascolto su reducer5:9005

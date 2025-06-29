@@ -1,13 +1,37 @@
 {
   "workers": [
-    { "role": "mapper", "address": "mapper1:9001" },
-    { "role": "mapper", "address": "mapper2:9002" },
-    { "role": "mapper", "address": "mapper3:9003" },
-    { "role": "mapper", "address": "mapper4:9004" },
-    { "role": "reducer", "address": "reducer5:9005" },
-    { "role": "reducer", "address": "reducer6:9006" },
-    { "role": "reducer", "address": "reducer7:9007" },
-    { "role": "reducer", "address": "reducer8:9008" }
+    {
+      "role": "mapper",
+      "address": "mapper1:9001"
+    },
+    {
+      "role": "mapper",
+      "address": "mapper2:9002"
+    },
+    {
+      "role": "mapper",
+      "address": "mapper3:9003"
+    },
+    {
+      "role": "mapper",
+      "address": "mapper4:9004"
+    },
+    {
+      "role": "reducer",
+      "address": "reducer5:9005"
+    },
+    {
+      "role": "reducer",
+      "address": "reducer6:9006"
+    },
+    {
+      "role": "reducer",
+      "address": "reducer7:9007"
+    },
+    {
+      "role": "reducer",
+      "address": "reducer8:9008"
+    }
   ],
   "settings": {
     "xi": 1,
