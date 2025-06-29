@@ -203,3 +203,16 @@ Reducer ha ricevuto i seguenti chunk: [5] per Owner reducer6:9006
 [WORKER] 2025/06/29 07:19:50 
 Reducer ha ricevuto i seguenti chunk: [5] per Owner reducer6:9006
 [WORKER] 2025/06/29 07:19:50 Reducer ha scritto i risultati in: output/temp_reducer6_9006.txt
+[WORKER] 2025/06/29 09:34:15 Worker in ascolto su reducer6:9006
+[WORKER] 2025/06/29 09:34:20 
+Reducer ha ricevuto i seguenti chunk: [7 10 10] per Owner reducer6:9006
+[WORKER] 2025/06/29 09:34:20 Reducer ha scritto i risultati in: output/temp_reducer6_9006.txt
+[WORKER] 2025/06/29 09:34:20 
+Reducer ha ricevuto i seguenti chunk: [3 3 4 9 10] per Owner reducer6:9006
+[WORKER] 2025/06/29 09:34:20 Reducer ha scritto i risultati in: output/temp_reducer6_9006.txt
+[WORKER] 2025/06/29 09:34:20 
+Reducer ha ricevuto i seguenti chunk: [5] per Owner reducer6:9006
+[WORKER] 2025/06/29 09:34:20 Reducer ha scritto i risultati in: output/temp_reducer6_9006.txt
+[WORKER] 2025/06/29 09:34:20 
+Reducer ha ricevuto i seguenti chunk: [6] per Owner reducer6:9006
+[WORKER] 2025/06/29 09:34:20 Reducer ha scritto i risultati in: output/temp_reducer6_9006.txt

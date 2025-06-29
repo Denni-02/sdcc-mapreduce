@@ -663,3 +663,41 @@ Numeri generati: [6 8 21 22 33 27 19 30 5 25 15 2 32 50 8 13 23 42 8 26 14 23 22
 [MASTER] 2025/06/29 07:19:50 MAP-03 completato
 [MASTER] 2025/06/29 07:19:50 Fase di Map completata.
 [MASTER] 2025/06/29 07:19:50 Unisco il file temporaneo: output/temp_reducer5_9005.txt
+[MASTER] 2025/06/29 09:34:15 Errore nella rimozione di log/log_master: remove log/log_master: device or resource busy
+[MASTER] 2025/06/29 09:34:15 Errore nella rimozione di log/log_worker: remove log/log_worker: directory not empty
+[MASTER] 2025/06/29 09:34:15 File output/final_output.txt rimosso.
+[MASTER] 2025/06/29 09:34:15 File temporaneo output/temp_mapper1.txt rimosso.
+[MASTER] 2025/06/29 09:34:15 File temporaneo output/temp_mapper2.txt rimosso.
+[MASTER] 2025/06/29 09:34:15 File temporaneo output/temp_mapper3.txt rimosso.
+[MASTER] 2025/06/29 09:34:15 File temporaneo output/temp_mapper4.txt rimosso.
+[MASTER] 2025/06/29 09:34:15 File temporaneo output/temp_reducer6_9006.txt rimosso.
+[MASTER] 2025/06/29 09:34:15 File temporaneo output/temp_reducer7_9007.txt rimosso.
+[MASTER] 2025/06/29 09:34:15 File temporaneo output/temp_reducer8_9008.txt rimosso.
+[MASTER] 2025/06/29 09:34:15 
+
+Numeri generati: [34 33 44 39 46 19 39 32 45 12 13 40 19 15 27 42 5 9 27 10 44 46 20 18 18 27 32 4 42 44 33 38 22 24 36 46 33 19 42 24 50 33 11 33 7 1 24 38 19 29 29 10 41 47 3 46 12 35 11 2 50 38 40 21 30 35 37 31 20 37 11 41 50 20 47 27 31 6 36 41 42 14 17 11 27 40 40 1 17 25 47 35 17 46 3 1 2 10 43 18]
+
+[MASTER] 2025/06/29 09:34:15 Chunk distribuiti ai mapper: [[34 33 44 39 46 19 39 32 45 12 13 40 19 15 27 42 5 9 27 10 44 46 20 18 18] [27 32 4 42 44 33 38 22 24 36 46 33 19 42 24 50 33 11 33 7 1 24 38 19 29] [29 10 41 47 3 46 12 35 11 2 50 38 40 21 30 35 37 31 20 37 11 41 50 20 47] [27 31 6 36 41 42 14 17 11 27 40 40 1 17 25 47 35 17 46 3 1 2 10 43 18]]
+
+[MASTER] 2025/06/29 09:34:15 sample = [35 34 3 39 11 21 11 44 40 47]
+[MASTER] 2025/06/29 09:34:15 sample ordinato= [3 11 11 21 34 35 39 40 44 47]
+[MASTER] 2025/06/29 09:34:15 ranges= [3 11 34]
+[MASTER] 2025/06/29 09:34:15 ranges = [3 11 34]
+[MASTER] 2025/06/29 09:34:15 Reducer reducer5:9005 gestisce l'intervallo [1, 3]
+[MASTER] 2025/06/29 09:34:15 Reducer reducer6:9006 gestisce l'intervallo [3, 11]
+[MASTER] 2025/06/29 09:34:15 Reducer reducer7:9007 gestisce l'intervallo [11, 34]
+[MASTER] 2025/06/29 09:34:15 Reducer reducer8:9008 gestisce l'intervallo [34, 51]
+2025/06/29 09:34:20 [MAP-02] Completato da mapper4:9004
+[MASTER] 2025/06/29 09:34:20 MAP-02 completato
+2025/06/29 09:34:20 [MAP-00] Completato da mapper2:9002
+[MASTER] 2025/06/29 09:34:20 MAP-00 completato
+2025/06/29 09:34:20 [MAP-03] Completato da mapper1:9001
+[MASTER] 2025/06/29 09:34:20 MAP-03 completato
+2025/06/29 09:34:20 [MAP-01] Completato da mapper3:9003
+[MASTER] 2025/06/29 09:34:20 MAP-01 completato
+[MASTER] 2025/06/29 09:34:20 Fase di Map completata.
+[MASTER] 2025/06/29 09:34:20 Unisco il file temporaneo: output/temp_reducer5_9005.txt
+[MASTER] 2025/06/29 09:34:20 Unisco il file temporaneo: output/temp_reducer6_9006.txt
+[MASTER] 2025/06/29 09:34:20 Unisco il file temporaneo: output/temp_reducer7_9007.txt
+[MASTER] 2025/06/29 09:34:20 Unisco il file temporaneo: output/temp_reducer8_9008.txt
+[MASTER] 2025/06/29 09:34:20 Output finale scritto in: output/final_output.txt

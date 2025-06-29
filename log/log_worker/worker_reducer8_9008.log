@@ -311,3 +311,16 @@ Reducer ha ricevuto i seguenti chunk: [19 23 27 31 34 34 35 38 46 48 50] per Own
 [WORKER] 2025/06/29 07:19:50 
 Reducer ha ricevuto i seguenti chunk: [21 21 22 22 22 27 34 39 39 42 46 46 47 49 49] per Owner reducer8:9008
 [WORKER] 2025/06/29 07:19:50 Reducer ha scritto i risultati in: output/temp_reducer8_9008.txt
+[WORKER] 2025/06/29 09:34:15 Worker in ascolto su reducer8:9008
+[WORKER] 2025/06/29 09:34:20 
+Reducer ha ricevuto i seguenti chunk: [37 38 38 40 41 41 42 42 46 46 47] per Owner reducer8:9008
+[WORKER] 2025/06/29 09:34:20 Reducer ha scritto i risultati in: output/temp_reducer8_9008.txt
+[WORKER] 2025/06/29 09:34:20 
+Reducer ha ricevuto i seguenti chunk: [34 35 39 40 43 44 44 45 46 47 47] per Owner reducer8:9008
+[WORKER] 2025/06/29 09:34:20 Reducer ha scritto i risultati in: output/temp_reducer8_9008.txt
+[WORKER] 2025/06/29 09:34:20 
+Reducer ha ricevuto i seguenti chunk: [35 36 36 37 38 39 42 42 44 46 50 50 50] per Owner reducer8:9008
+[WORKER] 2025/06/29 09:34:20 Reducer ha scritto i risultati in: output/temp_reducer8_9008.txt
+[WORKER] 2025/06/29 09:34:20 
+Reducer ha ricevuto i seguenti chunk: [35 40 40 41 46] per Owner reducer8:9008
+[WORKER] 2025/06/29 09:34:20 Reducer ha scritto i risultati in: output/temp_reducer8_9008.txt
