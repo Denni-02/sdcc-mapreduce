@@ -8,3 +8,5 @@ docker-compose build
 
 echo "Starting MapReduce system..."
 docker-compose up -d
+
+
