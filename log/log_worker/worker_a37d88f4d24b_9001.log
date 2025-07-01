@@ -1,0 +1,11 @@
+[WORKER] 2025/07/01 14:20:24 Registrazione avvenuta con successo (reducer - a37d88f4d24b:9001)
+[WORKER] 2025/07/01 14:20:24 Worker in ascolto su a37d88f4d24b:9001
+[WORKER] 2025/07/01 14:20:30 
+Reducer ha ricevuto i seguenti chunk: [1 2 3 4 7 9 10 10 12 17 18] per Owner a37d88f4d24b:9001
+[WORKER] 2025/07/01 14:20:30 Reducer ha scritto i risultati in: output/temp_a37d88f4d24b_9001.txt
+[WORKER] 2025/07/01 14:20:30 
+Reducer ha ricevuto i seguenti chunk: [1 4 4 10 12 15 16 16 17 17] per Owner a37d88f4d24b:9001
+[WORKER] 2025/07/01 14:20:30 Reducer ha scritto i risultati in: output/temp_a37d88f4d24b_9001.txt
+[WORKER] 2025/07/01 14:20:30 
+Reducer ha ricevuto i seguenti chunk: [2 3 5 5 7 7 14 16 18 18] per Owner a37d88f4d24b:9001
+[WORKER] 2025/07/01 14:20:30 Reducer ha scritto i risultati in: output/temp_a37d88f4d24b_9001.txt
