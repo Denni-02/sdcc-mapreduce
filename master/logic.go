@@ -153,50 +153,55 @@ func (m *Master) WaitForWorkers(expectedMappers, expectedReducers int) {
 
 // Assegna a ciascun reducer un intervallo [min, max] di valori e usa sampling per definire range bilanciati
 func (m *Master) MapReducersToRanges(data []int) map[string][2]int {
-
-	// Mappa per salvare il range per ogni reducer
 	reducerRanges := make(map[string][2]int)
 	reducers, numReducers := m.getReducers()
 
-	// Shuffle dei dati
+	// Shuffle per avere un sample casuale
 	shuffle(data)
 
-	// Calcolo dimensione sample (10% dataset)
-	tenPercentLenght := int(len(data) / 10)
-
-	// Estrae un sample rappresentativo dei dati
-	var sample []int
-	if tenPercentLenght >= numReducers {
-		sample = data[0:tenPercentLenght]
-	} else {
-		sample = data[0:numReducers] // se ha pochi dati almeno un valore per reducer
+	// Sample: minimo 10% del dataset, massimo tutto
+	sampleSize := int(len(data) / 10)
+	if sampleSize < numReducers {
+		sampleSize = numReducers
 	}
+	if sampleSize > len(data) {
+		sampleSize = len(data)
+	}
+	sample := data[:sampleSize]
 	log.Printf("sample = %v\n", sample)
 
-	// Crea intervalli bilanciat in base al sample
+	// Se troppi reducer rispetto al sample, li riduciamo
+	if numReducers > len(sample) {
+		log.Printf("Troppi reducer per il sample (%d reducer, %d sample). Uso solo %d reducer.\n", numReducers, len(sample), len(sample))
+		numReducers = len(sample)
+		// anche i reducer da usare vanno tagliati
+		reducers = reducers[:numReducers]
+	}
+
+	// Calcolo range bilanciati
 	ranges := createBalancedRanges(sample, numReducers)
 	log.Printf("ranges = %v\n", ranges)
 
 	for i, reducer := range reducers {
-		var lower int
-		var upper int
-
-		if i == 0 { // Primo reducer: da xi al primo range
+		var lower, upper int
+		if i == 0 {
 			lower = m.Settings.Xi
 			upper = ranges[0]
-		} else if i == numReducers-1 { // Ultimo reducer: dall'ultimo range fino a xf
-			upper = m.Settings.Xf + 1
+		} else if i == numReducers-1 {
 			lower = ranges[i-1]
-		} else { // Reducer intermedi
+			upper = m.Settings.Xf + 1
+		} else {
 			lower = ranges[i-1]
 			upper = ranges[i]
 		}
-
 		reducerRanges[reducer.Address] = [2]int{lower, upper}
 		log.Printf("Reducer %s gestisce l'intervallo [%d, %d]\n", reducer.Address, lower, upper)
 	}
+
+	log.Printf("Reducer effettivamente utilizzati: %d\n", numReducers)
 	return reducerRanges
 }
+
 
 // Ordina il sample e ritorna N−1 punti di taglio per N reducer
 func createBalancedRanges(sample []int, numReducers int) []int {
@@ -268,7 +273,6 @@ func (m *Master) ExecuteMapPhase(chunks [][]int, reducerRanges map[string][2]int
 
 // Combina i file di output dei reducer
 func (m *Master) CombineOutputFiles() {
-	// Crea o sovrascrive file per risultato finale
 	outputFile := "output/final_output.txt"
 	file, err := os.Create(outputFile)
 	if err != nil {
@@ -279,30 +283,18 @@ func (m *Master) CombineOutputFiles() {
 	writer := bufio.NewWriter(file)
 	reducers, _ := m.getReducers()
 
-	/// Unisce i file in ordine
 	for _, reducer := range reducers {
 		tempFile := fmt.Sprintf("output/temp_%s.txt", strings.ReplaceAll(reducer.Address, ":", "_"))
 		log.Printf("Unisco il file temporaneo: %s\n", tempFile)
 
-		// Attende che il file sia pronto (polling ogni 500ms, max 5s)
-		waited := 0
-		for {
-			if _, err := os.Stat(tempFile); err == nil {
-				break // trovato
-			}
-			if waited >= 10 {
-				continue 
-			}
-			time.Sleep(500 * time.Millisecond)
-			waited++
-		}
-
+		// Prova ad aprire il file, se non esiste logga e salta
 		content, err := os.ReadFile(tempFile)
 		if err != nil {
-			log.Printf("Errore nella lettura del file %s: %v", tempFile, err)
-			continue // anche qui, invece di goto
+			log.Printf("File %s non trovato o vuoto. Skippato.\n", tempFile)
+			continue
 		}
 
+		// Scrive il contenuto
 		writer.Write(content)
 		writer.WriteString("\n")
 	}
@@ -310,4 +302,3 @@ func (m *Master) CombineOutputFiles() {
 	writer.Flush()
 	log.Printf("Output finale scritto in: %s\n", outputFile)
 }
-

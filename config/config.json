@@ -2,8 +2,8 @@
   "workers": [],
   "settings": {
     "xi": 1,
-    "xf": 50,
-    "count": 100,
+    "xf": 100,
+    "count": 1000,
     "numMappers": 8,
     "numReducers": 8
   }
