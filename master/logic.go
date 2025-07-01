@@ -22,6 +22,7 @@ import (
 type Master struct {
 	Workers  []utils.WorkerConfig // Lista dei worker (mappers e reducers)
 	Settings utils.Settings       // Parametri generali del sistema
+	mu       sync.Mutex  // per accesso concorrente a workers
 }
 
 // ========================================================================================
@@ -93,6 +94,62 @@ func shuffle(slice []int) {
 // ========================================================================================
 // Logica e Fase MAP
 // ========================================================================================
+
+// Metodo RPC chiamato dai worker per registrarsi al master
+func (m *Master) Register(worker utils.WorkerConfig, reply *bool) error {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	// Evita duplicati
+	for _, w := range m.Workers {
+		if w.Address == worker.Address {
+			*reply = false
+			return nil
+		}
+	}
+
+	m.Workers = append(m.Workers, worker)
+	log.Printf("Registrato nuovo worker: %s (%s)\n", worker.Address, worker.Role)
+	*reply = true
+	return nil
+}
+
+// Attende che si registrino tutti i worker richiesti (mapper + reducer)
+func (m *Master) WaitForWorkers(expectedMappers, expectedReducers int) {
+	const timeoutSec = 30
+	const checkInterval = 1 * time.Second
+
+	log.Printf("Attendo la registrazione di %d mapper e %d reducer...\n", expectedMappers, expectedReducers)
+	deadline := time.Now().Add(time.Duration(timeoutSec) * time.Second)
+
+	for {
+		m.mu.Lock()
+		mappers := 0
+		reducers := 0
+		for _, w := range m.Workers {
+			if w.Role == "mapper" {
+				mappers++
+			} else if w.Role == "reducer" {
+				reducers++
+			}
+		}
+		m.mu.Unlock()
+
+		log.Printf("Registrati finora: %d mapper, %d reducer\n", mappers, reducers)
+
+		if mappers >= expectedMappers && reducers >= expectedReducers {
+			log.Println("Tutti i worker sono registrati, si può partire.")
+			break
+		}
+
+		if time.Now().After(deadline) {
+			log.Printf("Timeout: non tutti i worker si sono registrati in %d secondi", timeoutSec)
+			os.Exit(1)
+		}
+
+		time.Sleep(checkInterval)
+	}
+}
 
 // Assegna a ciascun reducer un intervallo [min, max] di valori e usa sampling per definire range bilanciati
 func (m *Master) MapReducersToRanges(data []int) map[string][2]int {

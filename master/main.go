@@ -2,8 +2,10 @@ package main
 
 import (
 	"log"
+	"net"
+	"net/rpc"
+	"os"
 	"sdcc-mapreduce/utils"
-        "os"
 )
 
 // Coordina l'intero flusso MapReduce: generazione dati, assegnazione task, raccolta risultati.
@@ -32,6 +34,26 @@ func main() {
 		Workers:  config.Workers,
 		Settings: config.Settings,
 	}
+
+	// Avvia il server RPC per la registrazione dei worker
+	rpcServer := rpc.NewServer()
+	err = rpcServer.Register(&master)
+	if err != nil {
+		log.Fatalf("Errore nella registrazione RPC del master: %v", err)
+	}
+
+	// Listener per accettare le connessioni dei worker
+	go func() {
+		listener, err := net.Listen("tcp", ":9000")
+		if err != nil {
+			log.Fatalf("Errore nell'ascolto su porta 9000: %v", err)
+		}
+		log.Println("Master RPC server in ascolto su :9000 per registrazioni")
+		rpcServer.Accept(listener)
+	}()
+
+	// Aspetta che tutti i worker si registrino
+	master.WaitForWorkers(config.Settings.NumMappers, config.Settings.NumReducers)
 
 	// Genera i dati casuali
 	data := master.GenerateData(config.Settings.Count, config.Settings.Xi, config.Settings.Xf)

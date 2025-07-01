@@ -1,0 +1,14 @@
+[WORKER] 2025/07/01 14:02:51 Registrazione avvenuta con successo (reducer - 6d96837b08ad:9001)
+[WORKER] 2025/07/01 14:02:51 Worker in ascolto su 6d96837b08ad:9001
+[WORKER] 2025/07/01 14:02:58 
+Reducer ha ricevuto i seguenti chunk: [1 2 4 6 8 8 8] per Owner 6d96837b08ad:9001
+[WORKER] 2025/07/01 14:02:58 Reducer ha scritto i risultati in: output/temp_6d96837b08ad_9001.txt
+[WORKER] 2025/07/01 14:02:58 
+Reducer ha ricevuto i seguenti chunk: [4 8] per Owner 6d96837b08ad:9001
+[WORKER] 2025/07/01 14:02:58 Reducer ha scritto i risultati in: output/temp_6d96837b08ad_9001.txt
+[WORKER] 2025/07/01 14:02:58 
+Reducer ha ricevuto i seguenti chunk: [1 2 6 6 8] per Owner 6d96837b08ad:9001
+[WORKER] 2025/07/01 14:02:58 Reducer ha scritto i risultati in: output/temp_6d96837b08ad_9001.txt
+[WORKER] 2025/07/01 14:02:58 
+Reducer ha ricevuto i seguenti chunk: [3 3 6 6 6] per Owner 6d96837b08ad:9001
+[WORKER] 2025/07/01 14:02:58 Reducer ha scritto i risultati in: output/temp_6d96837b08ad_9001.txt

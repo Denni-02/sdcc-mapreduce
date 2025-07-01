@@ -2,10 +2,11 @@ package main
 
 import (
 	"flag"
-	"log"
 	"fmt"
+	"log"
 	"net"
 	"net/rpc"
+	"os"
 	"sdcc-mapreduce/utils"
 )
 
@@ -23,7 +24,14 @@ func main() {
 	address := flag.String("address", "localhost:9001", "Indirizzo e porta del worker (es. localhost:9001)")
 	flag.Parse()
 
-	// Inizializza logger: restituisce anche il file per il defer
+	// Legge variabili d’ambiente
+	role := os.Getenv("ROLE")
+	masterAddr := os.Getenv("MASTER_ADDR")
+	if role == "" || masterAddr == "" {
+		log.Fatalf("Variabili ROLE o MASTER_ADDR mancanti")
+	}
+
+	// Inizializza logger
 	logFileName := "/app/log/log_worker/worker_" + utils.SanitizeAddr(*address) + ".log"
 	logger, file, err := utils.SetupLogger(logFileName, "[WORKER] ")
 	if err != nil {
@@ -33,6 +41,9 @@ func main() {
 	log.SetOutput(file) 
 	log.SetFlags(logger.Flags())      
 	log.SetPrefix(logger.Prefix())
+
+	// Invio di Register al master
+	registerSelf(*address, role, masterAddr)
 
 	// Crea una nuova istanza del worker che implementa i metodi RPC
 	worker := new(Worker)
@@ -51,5 +62,29 @@ func main() {
 	// Accetta le connessioni in arrivo e serve le richieste RPC
 	log.Printf("Worker in ascolto su %s\n", *address)
 	server.Accept(listener)
+}
+
+func registerSelf(address, role, masterAddr string) {
+	client, err := rpc.Dial("tcp", masterAddr)
+	if err != nil {
+		log.Fatalf("Errore connessione RPC al master (%s): %v", masterAddr, err)
+	}
+	defer client.Close()
+
+	req := utils.WorkerConfig{
+		Role:    role,
+		Address: address,
+	}
+	var reply bool
+
+	err = client.Call("Master.Register", req, &reply)
+	if err != nil {
+		log.Fatalf("Errore RPC Register: %v", err)
+	}
+	if reply {
+		log.Printf("Registrazione avvenuta con successo (%s - %s)", role, address)
+	} else {
+		log.Printf("Worker già registrato (%s)", address)
+	}
 }
 
