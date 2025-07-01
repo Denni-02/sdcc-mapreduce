@@ -1,0 +1,17 @@
+[WORKER] 2025/07/01 14:59:15 Registrazione avvenuta con successo (reducer - 180615e3e2c4:9001)
+[WORKER] 2025/07/01 14:59:15 Worker in ascolto su 180615e3e2c4:9001
+[WORKER] 2025/07/01 14:59:21 
+Reducer ha ricevuto i seguenti chunk: [35 39 40 41 43 44 47 47] per Owner 180615e3e2c4:9001
+[WORKER] 2025/07/01 14:59:21 Reducer ha scritto i risultati in: output/temp_180615e3e2c4_9001.txt
+[WORKER] 2025/07/01 14:59:21 
+Reducer ha ricevuto i seguenti chunk: [35 36 39 48] per Owner 180615e3e2c4:9001
+[WORKER] 2025/07/01 14:59:21 Reducer ha scritto i risultati in: output/temp_180615e3e2c4_9001.txt
+[WORKER] 2025/07/01 14:59:21 
+Reducer ha ricevuto i seguenti chunk: [38 42 43 43 45 49 50] per Owner 180615e3e2c4:9001
+[WORKER] 2025/07/01 14:59:21 Reducer ha scritto i risultati in: output/temp_180615e3e2c4_9001.txt
+[WORKER] 2025/07/01 14:59:21 
+Reducer ha ricevuto i seguenti chunk: [36 39 42 43 46] per Owner 180615e3e2c4:9001
+[WORKER] 2025/07/01 14:59:21 Reducer ha scritto i risultati in: output/temp_180615e3e2c4_9001.txt
+[WORKER] 2025/07/01 14:59:21 
+Reducer ha ricevuto i seguenti chunk: [35 36 37 38 38 41 41 49] per Owner 180615e3e2c4:9001
+[WORKER] 2025/07/01 14:59:21 Reducer ha scritto i risultati in: output/temp_180615e3e2c4_9001.txt

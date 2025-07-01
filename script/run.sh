@@ -8,6 +8,10 @@ CONFIG_PATH="./config/config.json"
 echo "Pulizia container precedenti..."
 docker-compose down --volumes --remove-orphans
 
+echo "Pulizia log..."
+rm -f ./log/log_master/*.log
+rm -f ./log/log_worker/*.log
+
 echo "Aggiornamento config.json con $NUM_MAPPERS mapper e $NUM_REDUCERS reducer..."
 
 # Inserisce dinamicamente numMappers e numReducers nel config.json
@@ -20,4 +24,4 @@ docker-compose build
 echo "Avvio con $NUM_MAPPERS mapper e $NUM_REDUCERS reducer..."
 docker-compose up -d --scale mapper=$NUM_MAPPERS --scale reducer=$NUM_REDUCERS
 
-echo "Sistema avviato. Controlla i log con: docker-compose logs -f"
+echo "Sistema avviato."

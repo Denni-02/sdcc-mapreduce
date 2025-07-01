@@ -11,6 +11,9 @@ import (
 // Coordina l'intero flusso MapReduce: generazione dati, assegnazione task, raccolta risultati.
 func main() {
 
+	// Pulizia dei file di output precedenti
+	utils.CleanupOutputFiles()
+
 	// Logger master
 	logger, file, err := utils.SetupLogger("/app/log/log_master/master.log", "[MASTER] ")
 	if err != nil {
@@ -20,11 +23,6 @@ func main() {
 	log.SetOutput(file)
 	log.SetFlags(logger.Flags())
 	log.SetPrefix(logger.Prefix())
-
-
-	// Pulizia dei file di output precedenti
-	utils.ClearOutputDir()
-	utils.CleanupOutputFiles()
 
 	// Carica la configurazione dal file config.json
 	config := utils.LoadConfig("config/config.json")

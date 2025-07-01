@@ -29,24 +29,4 @@ func CleanupOutputFiles() {
 	}
 }
 
-// Elimina tutti i file presenti in log/, ma non la cartella.
-func ClearOutputDir() {
-	err := os.MkdirAll("log", os.ModePerm) // assicurati che esista
-	if err != nil {
-		log.Fatalf("Errore nella creazione della cartella log/: %v", err)
-	}
 
-	files, err := filepath.Glob("log/*")
-	if err != nil {
-		log.Fatalf("Errore nel trovare i file in output/: %v", err)
-	}
-
-	for _, file := range files {
-		err := os.Remove(file)
-		if err != nil {
-			log.Printf("Errore nella rimozione di %s: %v", file, err)
-		} else {
-			log.Printf("File %s eliminato.", file)
-		}
-	}
-}

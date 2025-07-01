@@ -200,22 +200,28 @@ func (m *Master) MapReducersToRanges(data []int) map[string][2]int {
 
 // Ordina il sample e ritorna N−1 punti di taglio per N reducer
 func createBalancedRanges(sample []int, numReducers int) []int {
-
-	// Ordina il sample, così puoi dividerlo in ordine crescente
 	sort.Ints(sample)
 	log.Printf("sample ordinato= %v\n", sample)
 
-	// Prepara una slice per gli N−1 punti di separazione
-	ranges := make([]int, numReducers-1)
+	ranges := make([]int, 0)
+	step := len(sample) / numReducers
 
-	// Cut Point equidistanti dentro al sample ordinato
-	for i := 0; i < numReducers-1; i++ {
-		ranges[i] = sample[i*(len(sample)/numReducers)]
+	for i := 1; i < numReducers; i++ {
+		index := i * step
+		if index >= len(sample) {
+			break
+		}
+		val := sample[index]
+		// Evita valori duplicati consecutivi
+		if len(ranges) == 0 || val != ranges[len(ranges)-1] {
+			ranges = append(ranges, val)
+		}
 	}
 
 	log.Printf("ranges= %v\n", ranges)
 	return ranges
 }
+
 
 // Esegue la fase di Map assegnando ogni chunk di dati a un mapper disponibile
 func (m *Master) ExecuteMapPhase(chunks [][]int, reducerRanges map[string][2]int) {

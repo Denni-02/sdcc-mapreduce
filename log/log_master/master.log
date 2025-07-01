@@ -1,132 +1,49 @@
-[MASTER] 2025/07/01 14:02:51 Errore nella rimozione di log/log_master: remove log/log_master: device or resource busy
-[MASTER] 2025/07/01 14:02:51 File log/log_worker eliminato.
-[MASTER] 2025/07/01 14:02:51 Attendo la registrazione di 4 mapper e 4 reducer...
-[MASTER] 2025/07/01 14:02:51 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/01 14:02:51 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/01 14:02:51 Registrato nuovo worker: 9fdfa9e46503:9001 (mapper)
-[MASTER] 2025/07/01 14:02:51 Registrato nuovo worker: 6d96837b08ad:9001 (reducer)
-[MASTER] 2025/07/01 14:02:51 Registrato nuovo worker: 49ba0a5ae5a6:9001 (mapper)
-[MASTER] 2025/07/01 14:02:52 Registrato nuovo worker: a63e9f662ad8:9001 (reducer)
-[MASTER] 2025/07/01 14:02:52 Registrato nuovo worker: a2787132f92c:9001 (mapper)
-[MASTER] 2025/07/01 14:02:52 Registrato nuovo worker: ae3ddac8d7b2:9001 (reducer)
-[MASTER] 2025/07/01 14:02:52 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:02:52 Registrato nuovo worker: 451f7da6b987:9001 (mapper)
-[MASTER] 2025/07/01 14:02:52 Registrato nuovo worker: c5a4db658fcb:9001 (reducer)
-[MASTER] 2025/07/01 14:02:53 Registrati finora: 4 mapper, 4 reducer
-[MASTER] 2025/07/01 14:02:53 Tutti i worker sono registrati, si può partire.
-[MASTER] 2025/07/01 14:02:53 
+[MASTER] 2025/07/01 14:59:13 Attendo la registrazione di 5 mapper e 5 reducer...
+[MASTER] 2025/07/01 14:59:13 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/01 14:59:13 Master RPC server in ascolto su :9000 per registrazioni
+[MASTER] 2025/07/01 14:59:13 Registrato nuovo worker: 2e4ca263211b:9001 (mapper)
+[MASTER] 2025/07/01 14:59:13 Registrato nuovo worker: 740ed4c16919:9001 (reducer)
+[MASTER] 2025/07/01 14:59:14 Registrato nuovo worker: dc280cb9bdff:9001 (mapper)
+[MASTER] 2025/07/01 14:59:14 Registrati finora: 2 mapper, 1 reducer
+[MASTER] 2025/07/01 14:59:14 Registrato nuovo worker: e8cada55e963:9001 (reducer)
+[MASTER] 2025/07/01 14:59:14 Registrato nuovo worker: 04429ac9245f:9001 (mapper)
+[MASTER] 2025/07/01 14:59:14 Registrato nuovo worker: aa3bb7eb0d35:9001 (reducer)
+[MASTER] 2025/07/01 14:59:15 Registrato nuovo worker: 0afa0a741c8a:9001 (mapper)
+[MASTER] 2025/07/01 14:59:15 Registrato nuovo worker: 1210c99e6c6c:9001 (reducer)
+[MASTER] 2025/07/01 14:59:15 Registrati finora: 4 mapper, 4 reducer
+[MASTER] 2025/07/01 14:59:15 Registrato nuovo worker: 76ce374e8a1e:9001 (mapper)
+[MASTER] 2025/07/01 14:59:15 Registrato nuovo worker: 180615e3e2c4:9001 (reducer)
+[MASTER] 2025/07/01 14:59:16 Registrati finora: 5 mapper, 5 reducer
+[MASTER] 2025/07/01 14:59:16 Tutti i worker sono registrati, si può partire.
+[MASTER] 2025/07/01 14:59:16 
 
-Numeri generati: [6 39 40 11 1 29 46 40 6 4 47 45 10 12 40 48 43 29 14 27 6 8 8 12 13 47 35 15 29 32 34 36 31 3 12 9 50 45 36 6 24 45 30 48 13 14 28 25 8 16 3 41 8 23 6 31 26 11 46 29 4 20 40 46 47 8 14 32 42 47 2 46 27 37 9 37 6 26 45 46 38 29 21 49 1 28 50 25 46 11 2 21 18 35 14 36 22 31 36 19]
+Numeri generati: [32 22 21 45 39 23 32 32 5 4 24 30 35 26 3 43 22 3 18 32 39 40 33 48 21 30 15 34 38 4 41 22 8 39 24 35 10 8 41 49 19 11 11 36 8 27 11 3 32 38 28 2 24 12 42 44 30 3 25 43 13 29 31 49 38 47 37 43 16 24 26 27 17 43 14 30 30 11 6 35 50 1 46 3 9 19 36 42 5 16 11 47 30 26 6 4 32 18 36 41]
 
-[MASTER] 2025/07/01 14:02:53 Chunk distribuiti ai mapper: [[6 39 40 11 1 29 46 40 6 4 47 45 10 12 40 48 43 29 14 27 6 8 8 12 13] [47 35 15 29 32 34 36 31 3 12 9 50 45 36 6 24 45 30 48 13 14 28 25 8 16] [3 41 8 23 6 31 26 11 46 29 4 20 40 46 47 8 14 32 42 47 2 46 27 37 9] [37 6 26 45 46 38 29 21 49 1 28 50 25 46 11 2 21 18 35 14 36 22 31 36 19]]
+[MASTER] 2025/07/01 14:59:16 Chunk distribuiti ai mapper: [[32 22 21 45 39 23 32 32 5 4 24 30 35 26 3 43 22 3 18 32] [39 40 33 48 21 30 15 34 38 4 41 22 8 39 24 35 10 8 41 49] [19 11 11 36 8 27 11 3 32 38 28 2 24 12 42 44 30 3 25 43] [13 29 31 49 38 47 37 43 16 24 26 27 17 43 14 30 30 11 6 35] [50 1 46 3 9 19 36 42 5 16 11 47 30 26 6 4 32 18 36 41]]
 
-[MASTER] 2025/07/01 14:02:53 sample = [9 32 14 29 43 45 40 21 36 36]
-[MASTER] 2025/07/01 14:02:53 sample ordinato= [9 14 21 29 32 36 36 40 43 45]
-[MASTER] 2025/07/01 14:02:53 ranges= [9 21 32]
-[MASTER] 2025/07/01 14:02:53 ranges = [9 21 32]
-[MASTER] 2025/07/01 14:02:53 Reducer 6d96837b08ad:9001 gestisce l'intervallo [1, 9]
-[MASTER] 2025/07/01 14:02:53 Reducer a63e9f662ad8:9001 gestisce l'intervallo [9, 21]
-[MASTER] 2025/07/01 14:02:53 Reducer ae3ddac8d7b2:9001 gestisce l'intervallo [21, 32]
-[MASTER] 2025/07/01 14:02:53 Reducer c5a4db658fcb:9001 gestisce l'intervallo [32, 51]
-2025/07/01 14:02:58 [MAP-02] Completato da a2787132f92c:9001
-[MASTER] 2025/07/01 14:02:58 MAP-02 completato
-2025/07/01 14:02:58 [MAP-00] Completato da 451f7da6b987:9001
-[MASTER] 2025/07/01 14:02:58 MAP-00 completato
-2025/07/01 14:02:58 [MAP-01] Completato da 49ba0a5ae5a6:9001
-2025/07/01 14:02:58 [MAP-03] Completato da 9fdfa9e46503:9001
-[MASTER] 2025/07/01 14:02:58 MAP-01 completato
-[MASTER] 2025/07/01 14:02:58 MAP-03 completato
-[MASTER] 2025/07/01 14:02:58 Fase di Map completata.
-[MASTER] 2025/07/01 14:02:58 Unisco il file temporaneo: output/temp_6d96837b08ad_9001.txt
-[MASTER] 2025/07/01 14:02:58 Unisco il file temporaneo: output/temp_a63e9f662ad8_9001.txt
-[MASTER] 2025/07/01 14:02:58 Unisco il file temporaneo: output/temp_ae3ddac8d7b2_9001.txt
-[MASTER] 2025/07/01 14:02:58 Unisco il file temporaneo: output/temp_c5a4db658fcb_9001.txt
-[MASTER] 2025/07/01 14:02:58 Output finale scritto in: output/final_output.txt
-[MASTER] 2025/07/01 14:15:13 Errore nella rimozione di log/log_master: remove log/log_master: device or resource busy
-[MASTER] 2025/07/01 14:15:13 Errore nella rimozione di log/log_worker: remove log/log_worker: directory not empty
-[MASTER] 2025/07/01 14:15:13 File output/final_output.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 File temporaneo output/temp_451f7da6b987.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 File temporaneo output/temp_49ba0a5ae5a6.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 File temporaneo output/temp_6d96837b08ad_9001.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 File temporaneo output/temp_9fdfa9e46503.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 File temporaneo output/temp_a2787132f92c.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 File temporaneo output/temp_a63e9f662ad8_9001.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 File temporaneo output/temp_ae3ddac8d7b2_9001.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 File temporaneo output/temp_c5a4db658fcb_9001.txt rimosso.
-[MASTER] 2025/07/01 14:15:13 Attendo la registrazione di 4 mapper e 4 reducer...
-[MASTER] 2025/07/01 14:15:13 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/01 14:15:13 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/01 14:15:14 Registrato nuovo worker: 50b84b1e2476:9001 (reducer)
-[MASTER] 2025/07/01 14:15:14 Registrato nuovo worker: dc0251653148:9001 (mapper)
-[MASTER] 2025/07/01 14:15:14 Registrato nuovo worker: 441650831b4f:9001 (reducer)
-[MASTER] 2025/07/01 14:15:14 Registrato nuovo worker: e2ecd287a255:9001 (mapper)
-[MASTER] 2025/07/01 14:15:14 Registrato nuovo worker: e1a4980b4555:9001 (reducer)
-[MASTER] 2025/07/01 14:15:14 Registrato nuovo worker: eac7a13a18e4:9001 (mapper)
-[MASTER] 2025/07/01 14:15:14 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:15 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:16 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:17 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:18 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:19 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:20 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:21 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:22 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:23 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:24 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:25 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:26 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:27 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:28 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:29 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:30 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:31 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:32 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:33 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:34 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:35 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:36 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:37 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:38 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:39 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:40 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:41 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:42 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:43 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:15:43 Timeout: non tutti i worker si sono registrati in 30 secondi
-[MASTER] 2025/07/01 14:20:24 Errore nella rimozione di log/log_master: remove log/log_master: device or resource busy
-[MASTER] 2025/07/01 14:20:24 Errore nella rimozione di log/log_worker: remove log/log_worker: directory not empty
-[MASTER] 2025/07/01 14:20:24 Attendo la registrazione di 3 mapper e 3 reducer...
-[MASTER] 2025/07/01 14:20:24 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/01 14:20:24 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/01 14:20:24 Registrato nuovo worker: a37d88f4d24b:9001 (reducer)
-[MASTER] 2025/07/01 14:20:24 Registrato nuovo worker: 2d0736230d1f:9001 (mapper)
-[MASTER] 2025/07/01 14:20:25 Registrato nuovo worker: 617b5384c891:9001 (reducer)
-[MASTER] 2025/07/01 14:20:25 Registrato nuovo worker: 17d2dd4836f7:9001 (mapper)
-[MASTER] 2025/07/01 14:20:25 Registrato nuovo worker: 04796c383732:9001 (reducer)
-[MASTER] 2025/07/01 14:20:25 Registrato nuovo worker: 7ec52930cc04:9001 (mapper)
-[MASTER] 2025/07/01 14:20:25 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/01 14:20:25 Tutti i worker sono registrati, si può partire.
-[MASTER] 2025/07/01 14:20:25 
-
-Numeri generati: [38 46 36 2 10 47 47 44 2 38 17 20 30 26 16 32 3 16 22 26 5 34 24 20 31 7 27 18 1 16 47 36 35 7 37 38 7 18 37 44 5 4 17 46 33 30 14 31 47 9 23 24 35 46 24 10 49 33 12 38 34 32 38 20 33 15 39 29 1 34 17 4 12 50 44 43 18 34 47 41 40 20 48 35 36 23 30 21 39 3 23 4 20 34 33 10 27 34 21 32]
-
-[MASTER] 2025/07/01 14:20:25 Chunk distribuiti ai mapper: [[38 46 36 2 10 47 47 44 2 38 17 20 30 26 16 32 3 16 22 26 5 34 24 20 31 7 27 18 1 16 47 36 35 7] [37 38 7 18 37 44 5 4 17 46 33 30 14 31 47 9 23 24 35 46 24 10 49 33 12 38 34 32 38 20 33 15 39 29] [1 34 17 4 12 50 44 43 18 34 47 41 40 20 48 35 36 23 30 21 39 3 23 4 20 34 33 10 27 34 21 32]]
-
-[MASTER] 2025/07/01 14:20:25 sample = [37 44 36 39 20 40 22 46 20 47]
-[MASTER] 2025/07/01 14:20:25 sample ordinato= [20 20 22 36 37 39 40 44 46 47]
-[MASTER] 2025/07/01 14:20:25 ranges= [20 36]
-[MASTER] 2025/07/01 14:20:25 ranges = [20 36]
-[MASTER] 2025/07/01 14:20:25 Reducer a37d88f4d24b:9001 gestisce l'intervallo [1, 20]
-[MASTER] 2025/07/01 14:20:25 Reducer 617b5384c891:9001 gestisce l'intervallo [20, 36]
-[MASTER] 2025/07/01 14:20:25 Reducer 04796c383732:9001 gestisce l'intervallo [36, 51]
-2025/07/01 14:20:30 [MAP-02] Completato da 2d0736230d1f:9001
-[MASTER] 2025/07/01 14:20:30 MAP-02 completato
-2025/07/01 14:20:30 [MAP-00] Completato da 17d2dd4836f7:9001
-[MASTER] 2025/07/01 14:20:30 MAP-00 completato
-2025/07/01 14:20:30 [MAP-01] Completato da 7ec52930cc04:9001
-[MASTER] 2025/07/01 14:20:30 MAP-01 completato
-[MASTER] 2025/07/01 14:20:30 Fase di Map completata.
-[MASTER] 2025/07/01 14:20:30 Unisco il file temporaneo: output/temp_a37d88f4d24b_9001.txt
-[MASTER] 2025/07/01 14:20:30 Unisco il file temporaneo: output/temp_617b5384c891_9001.txt
-[MASTER] 2025/07/01 14:20:30 Unisco il file temporaneo: output/temp_04796c383732_9001.txt
-[MASTER] 2025/07/01 14:20:30 Output finale scritto in: output/final_output.txt
+[MASTER] 2025/07/01 14:59:16 sample = [6 15 3 32 28 35 30 25 48 30]
+[MASTER] 2025/07/01 14:59:16 sample ordinato= [3 6 15 25 28 30 30 32 35 48]
+[MASTER] 2025/07/01 14:59:16 ranges= [15 28 30 35]
+[MASTER] 2025/07/01 14:59:16 ranges = [15 28 30 35]
+[MASTER] 2025/07/01 14:59:16 Reducer 740ed4c16919:9001 gestisce l'intervallo [1, 15]
+[MASTER] 2025/07/01 14:59:16 Reducer e8cada55e963:9001 gestisce l'intervallo [15, 28]
+[MASTER] 2025/07/01 14:59:16 Reducer aa3bb7eb0d35:9001 gestisce l'intervallo [28, 30]
+[MASTER] 2025/07/01 14:59:16 Reducer 1210c99e6c6c:9001 gestisce l'intervallo [30, 35]
+[MASTER] 2025/07/01 14:59:16 Reducer 180615e3e2c4:9001 gestisce l'intervallo [35, 51]
+2025/07/01 14:59:21 [MAP-03] Completato da 0afa0a741c8a:9001
+[MASTER] 2025/07/01 14:59:21 MAP-03 completato
+2025/07/01 14:59:21 [MAP-02] Completato da 04429ac9245f:9001
+[MASTER] 2025/07/01 14:59:21 MAP-02 completato
+2025/07/01 14:59:21 [MAP-04] Completato da 2e4ca263211b:9001
+[MASTER] 2025/07/01 14:59:21 MAP-04 completato
+2025/07/01 14:59:21 [MAP-01] Completato da dc280cb9bdff:9001
+[MASTER] 2025/07/01 14:59:21 MAP-01 completato
+2025/07/01 14:59:21 [MAP-00] Completato da 76ce374e8a1e:9001
+[MASTER] 2025/07/01 14:59:21 MAP-00 completato
+[MASTER] 2025/07/01 14:59:21 Fase di Map completata.
+[MASTER] 2025/07/01 14:59:21 Unisco il file temporaneo: output/temp_740ed4c16919_9001.txt
+[MASTER] 2025/07/01 14:59:21 Unisco il file temporaneo: output/temp_e8cada55e963_9001.txt
+[MASTER] 2025/07/01 14:59:21 Unisco il file temporaneo: output/temp_aa3bb7eb0d35_9001.txt
+[MASTER] 2025/07/01 14:59:21 Unisco il file temporaneo: output/temp_1210c99e6c6c_9001.txt
+[MASTER] 2025/07/01 14:59:21 Unisco il file temporaneo: output/temp_180615e3e2c4_9001.txt
+[MASTER] 2025/07/01 14:59:21 Output finale scritto in: output/final_output.txt
