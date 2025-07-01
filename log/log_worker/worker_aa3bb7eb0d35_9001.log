@@ -1,8 +1,0 @@
-[WORKER] 2025/07/01 14:59:14 Registrazione avvenuta con successo (reducer - aa3bb7eb0d35:9001)
-[WORKER] 2025/07/01 14:59:14 Worker in ascolto su aa3bb7eb0d35:9001
-[WORKER] 2025/07/01 14:59:21 
-Reducer ha ricevuto i seguenti chunk: [28] per Owner aa3bb7eb0d35:9001
-[WORKER] 2025/07/01 14:59:21 Reducer ha scritto i risultati in: output/temp_aa3bb7eb0d35_9001.txt
-[WORKER] 2025/07/01 14:59:21 
-Reducer ha ricevuto i seguenti chunk: [29] per Owner aa3bb7eb0d35:9001
-[WORKER] 2025/07/01 14:59:21 Reducer ha scritto i risultati in: output/temp_aa3bb7eb0d35_9001.txt

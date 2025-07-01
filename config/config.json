@@ -4,7 +4,7 @@
     "xi": 1,
     "xf": 50,
     "count": 100,
-    "numMappers": 5,
-    "numReducers": 5
+    "numMappers": 8,
+    "numReducers": 8
   }
 }
