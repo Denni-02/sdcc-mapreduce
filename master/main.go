@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
 	"net/rpc"
 	"os"
+	"time"
 	"sdcc-mapreduce/utils"
 )
 
@@ -56,13 +58,18 @@ func main() {
 	// Genera i dati casuali
 	data := master.GenerateData(config.Settings.Count, config.Settings.Xi, config.Settings.Xf)
 	log.Printf("\n\nNumeri generati: %v\n\n", data)
+	utils.SaveDataToFile(data)
 
 	// Suddivide i dati in chunk
 	chunks := master.SplitData(data)
 	log.Printf("Chunk distribuiti ai mapper: %v\n\n", chunks)
+	utils.SaveChunksToFile(chunks)
 
 	// Mappa i reducer agli intervalli di competenza
 	reducerRanges := master.MapReducersToRanges(data)
+
+	fmt.Println("Tutti i worker registrati. Attendo 15 secondi prima della fase MAP per permettere fault injection...")
+	time.Sleep(15 * time.Second)
 
 	// Fase di Map
 	master.ExecuteMapPhase(chunks, reducerRanges)

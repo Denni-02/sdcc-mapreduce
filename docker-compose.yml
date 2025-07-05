@@ -11,6 +11,13 @@ services:
     volumes:
       - ./output:/app/output
       - ./log/log_master:/app/log/log_master
+      - ./state:/app/state  
+    environment:
+      - ENABLE_S3=${ENABLE_S3}
+      - S3_BUCKET=${S3_BUCKET}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
     networks:
       - mapreduce-net
 

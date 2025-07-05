@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -a
+source .env
+set +a
+
 # Numero di mapper e reducer passati da linea di comando, default = 4
 NUM_MAPPERS=${1:-4}
 NUM_REDUCERS=${2:-4}
@@ -22,6 +26,6 @@ echo "Build immagini Docker..."
 docker-compose build
 
 echo "Avvio con $NUM_MAPPERS mapper e $NUM_REDUCERS reducer..."
-docker-compose up -d --scale mapper=$NUM_MAPPERS --scale reducer=$NUM_REDUCERS
+docker-compose up --scale mapper=$NUM_MAPPERS --scale reducer=$NUM_REDUCERS
 
 echo "Sistema avviato."

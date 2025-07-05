@@ -2,9 +2,9 @@
   "workers": [],
   "settings": {
     "xi": 1,
-    "xf": 100,
-    "count": 1000,
-    "numMappers": 8,
-    "numReducers": 8
+    "xf": 50,
+    "count": 100,
+    "numMappers": 3,
+    "numReducers": 3
   }
 }

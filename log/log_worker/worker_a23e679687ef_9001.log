@@ -1,0 +1,11 @@
+[WORKER] 2025/07/05 14:59:07 Registrazione avvenuta con successo (reducer - a23e679687ef:9001)
+[WORKER] 2025/07/05 14:59:07 Worker in ascolto su a23e679687ef:9001
+[WORKER] 2025/07/05 14:59:27 
+Reducer ha ricevuto i seguenti chunk: [12 14 15 15 15 21 21 24 25 26 26 27 27 27] per Owner a23e679687ef:9001
+[WORKER] 2025/07/05 14:59:27 Reducer ha scritto i risultati in: output/temp_a23e679687ef_9001.txt
+[WORKER] 2025/07/05 14:59:27 
+Reducer ha ricevuto i seguenti chunk: [13 18 22 23 24 25 27 28 29 32 32] per Owner a23e679687ef:9001
+[WORKER] 2025/07/05 14:59:27 Reducer ha scritto i risultati in: output/temp_a23e679687ef_9001.txt
+[WORKER] 2025/07/05 14:59:27 
+Reducer ha ricevuto i seguenti chunk: [12 13 15 16 16 17 18 19 20 23 24 25 26 30 31 31 32] per Owner a23e679687ef:9001
+[WORKER] 2025/07/05 14:59:27 Reducer ha scritto i risultati in: output/temp_a23e679687ef_9001.txt
