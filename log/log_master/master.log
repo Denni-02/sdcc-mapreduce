@@ -1,38 +1,42 @@
-[MASTER] 2025/07/05 14:59:06 Attendo la registrazione di 3 mapper e 3 reducer...
-[MASTER] 2025/07/05 14:59:06 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/05 14:59:06 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/05 14:59:06 Registrato nuovo worker: 42f3a9d619cf:9001 (mapper)
-[MASTER] 2025/07/05 14:59:07 Registrato nuovo worker: aca42862c75e:9001 (reducer)
-[MASTER] 2025/07/05 14:59:07 Registrato nuovo worker: b7f802f81cf2:9001 (mapper)
-[MASTER] 2025/07/05 14:59:07 Registrato nuovo worker: a23e679687ef:9001 (reducer)
-[MASTER] 2025/07/05 14:59:07 Registrato nuovo worker: 729bcda3887f:9001 (mapper)
-[MASTER] 2025/07/05 14:59:07 Registrato nuovo worker: 4adbe5e8def3:9001 (reducer)
-[MASTER] 2025/07/05 14:59:07 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/05 14:59:07 Tutti i worker sono registrati, si può partire.
-[MASTER] 2025/07/05 14:59:07 
+[MASTER] 2025/07/08 15:07:38 Attendo la registrazione di 3 mapper e 3 reducer...
+[MASTER] 2025/07/08 15:07:38 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/08 15:07:38 Master RPC server in ascolto su :9000 per registrazioni
+[MASTER] 2025/07/08 15:07:39 Registrato nuovo worker: 68d1be76754a:9001 (mapper)
+[MASTER] 2025/07/08 15:07:39 Registrato nuovo worker: e0c25a5269f3:9001 (reducer)
+[MASTER] 2025/07/08 15:07:39 Registrati finora: 1 mapper, 1 reducer
+[MASTER] 2025/07/08 15:07:40 Registrato nuovo worker: 781b9c5fddf6:9001 (mapper)
+[MASTER] 2025/07/08 15:07:40 Registrato nuovo worker: 160e642ab35d:9001 (reducer)
+[MASTER] 2025/07/08 15:07:40 Registrati finora: 2 mapper, 2 reducer
+[MASTER] 2025/07/08 15:07:41 Registrato nuovo worker: b349de9e4465:9001 (mapper)
+[MASTER] 2025/07/08 15:07:41 Registrato nuovo worker: ab64e2e76f82:9001 (reducer)
+[MASTER] 2025/07/08 15:07:41 Registrati finora: 3 mapper, 3 reducer
+[MASTER] 2025/07/08 15:07:41 Tutti i worker sono registrati, si può partire.
+[MASTER] 2025/07/08 15:07:41 
 
-Numeri generati: [7 45 12 43 43 46 1 11 23 36 30 23 31 48 25 1 36 37 5 37 27 15 50 13 14 48 41 46 15 28 38 5 39 27 8 35 33 32 25 29 37 10 50 9 19 9 25 12 3 26 33 17 36 33 32 36 3 24 21 15 36 37 44 31 26 27 20 22 18 40 8 3 45 2 32 38 40 26 9 13 45 48 6 36 16 9 48 24 16 27 24 10 18 21 50 46 4 11 41 15]
+Numeri generati: [38 13 19 48 14 8 19 45 47 6 47 34 13 2 19 39 41 11 47 28 29 42 47 49 39 36 18 38 48 35 47 23 43 33 39 1 10 32 43 17 15 16 5 49 32 35 25 13 31 36 39 27 10 28 15 14 24 11 31 8 43 50 41 10 2 12 49 43 47 15 30 20 27 42 39 5 8 49 20 28 22 30 40 22 24 11 11 13 15 6 40 40 49 14 4 17 44 37 50 14]
 
-[MASTER] 2025/07/05 14:59:07 [STATE] Dati salvati in state/data.json
-[MASTER] 2025/07/05 14:59:07 Chunk distribuiti ai mapper: [[7 45 12 43 43 46 1 11 23 36 30 23 31 48 25 1 36 37 5 37 27 15 50 13 14 48 41 46 15 28 38 5 39 27] [8 35 33 32 25 29 37 10 50 9 19 9 25 12 3 26 33 17 36 33 32 36 3 24 21 15 36 37 44 31 26 27 20 22] [18 40 8 3 45 2 32 38 40 26 9 13 45 48 6 36 16 9 48 24 16 27 24 10 18 21 50 46 4 11 41 15]]
+[MASTER] 2025/07/08 15:07:41 [STATE] Dati salvati in state/data.json
+[MASTER] 2025/07/08 15:07:43 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/data.json
+[MASTER] 2025/07/08 15:07:43 Chunk distribuiti ai mapper: [[38 13 19 48 14 8 19 45 47 6 47 34 13 2 19 39 41 11 47 28 29 42 47 49 39 36 18 38 48 35 47 23 43 33] [39 1 10 32 43 17 15 16 5 49 32 35 25 13 31 36 39 27 10 28 15 14 24 11 31 8 43 50 41 10 2 12 49 43] [47 15 30 20 27 42 39 5 8 49 20 28 22 30 40 22 24 11 11 13 15 6 40 40 49 14 4 17 44 37 50 14]]
 
-[MASTER] 2025/07/05 14:59:07 [STATE] Chunk salvati in state/chunks.json
-[MASTER] 2025/07/05 14:59:07 sample = [36 33 1 12 9 50 31 26 3 48]
-[MASTER] 2025/07/05 14:59:07 sample ordinato= [1 3 9 12 26 31 33 36 48 50]
-[MASTER] 2025/07/05 14:59:07 ranges= [12 33]
-[MASTER] 2025/07/05 14:59:07 ranges = [12 33]
-[MASTER] 2025/07/05 14:59:07 Reducer aca42862c75e:9001 gestisce l'intervallo [1, 12]
-[MASTER] 2025/07/05 14:59:07 Reducer a23e679687ef:9001 gestisce l'intervallo [12, 33]
-[MASTER] 2025/07/05 14:59:07 Reducer 4adbe5e8def3:9001 gestisce l'intervallo [33, 51]
-[MASTER] 2025/07/05 14:59:07 Reducer effettivamente utilizzati: 3
-2025/07/05 14:59:27 [MAP-01] Completato con successo da 729bcda3887f:9001
-[MASTER] 2025/07/05 14:59:27 MAP-01 completato
-2025/07/05 14:59:27 [MAP-00] Completato con successo da b7f802f81cf2:9001
-[MASTER] 2025/07/05 14:59:27 MAP-00 completato
-2025/07/05 14:59:27 [MAP-02] Completato con successo da 42f3a9d619cf:9001
-[MASTER] 2025/07/05 14:59:27 MAP-02 completato
-[MASTER] 2025/07/05 14:59:27 Fase di Map completata.
-[MASTER] 2025/07/05 14:59:27 Unisco il file temporaneo: output/temp_aca42862c75e_9001.txt
-[MASTER] 2025/07/05 14:59:27 Unisco il file temporaneo: output/temp_a23e679687ef_9001.txt
-[MASTER] 2025/07/05 14:59:27 Unisco il file temporaneo: output/temp_4adbe5e8def3_9001.txt
-[MASTER] 2025/07/05 14:59:27 Output finale scritto in: output/final_output.txt
+[MASTER] 2025/07/08 15:07:43 [STATE] Chunk salvati in state/chunks.json
+[MASTER] 2025/07/08 15:07:43 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/chunks.json
+[MASTER] 2025/07/08 15:07:43 sample = [24 19 47 35 41 8 37 6 8 31]
+[MASTER] 2025/07/08 15:07:43 sample ordinato= [6 8 8 19 24 31 35 37 41 47]
+[MASTER] 2025/07/08 15:07:43 ranges= [19 35]
+[MASTER] 2025/07/08 15:07:43 ranges = [19 35]
+[MASTER] 2025/07/08 15:07:43 Reducer e0c25a5269f3:9001 gestisce l'intervallo [1, 19]
+[MASTER] 2025/07/08 15:07:43 Reducer 160e642ab35d:9001 gestisce l'intervallo [19, 35]
+[MASTER] 2025/07/08 15:07:43 Reducer ab64e2e76f82:9001 gestisce l'intervallo [35, 51]
+[MASTER] 2025/07/08 15:07:43 Reducer effettivamente utilizzati: 3
+2025/07/08 15:08:03 [MAP-01] Completato con successo da b349de9e4465:9001
+[MASTER] 2025/07/08 15:08:03 MAP-01 completato
+2025/07/08 15:08:03 [MAP-00] Completato con successo da 781b9c5fddf6:9001
+[MASTER] 2025/07/08 15:08:03 MAP-00 completato
+2025/07/08 15:08:03 [MAP-02] Completato con successo da 68d1be76754a:9001
+[MASTER] 2025/07/08 15:08:03 MAP-02 completato
+[MASTER] 2025/07/08 15:08:03 Fase di Map completata.
+[MASTER] 2025/07/08 15:08:03 Unisco il file temporaneo: output/temp_e0c25a5269f3_9001.txt
+[MASTER] 2025/07/08 15:08:03 Unisco il file temporaneo: output/temp_160e642ab35d_9001.txt
+[MASTER] 2025/07/08 15:08:03 Unisco il file temporaneo: output/temp_ab64e2e76f82_9001.txt
+[MASTER] 2025/07/08 15:08:03 Output finale scritto in: output/final_output.txt
