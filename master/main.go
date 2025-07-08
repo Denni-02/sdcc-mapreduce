@@ -54,6 +54,13 @@ func main() {
 	// Aspetta che tutti i worker si registrino
 	master.WaitForWorkers(config.Settings.NumMappers, config.Settings.NumReducers)
 
+	if utils.PhaseAlreadyDone() {
+		log.Println("MAP già completata. Passo al Combine.")
+		master.CombineOutputFiles()
+		utils.ResetState()
+		return
+	}
+
 	// Genera i dati casuali
 	data := master.GenerateData(config.Settings.Count, config.Settings.Xi, config.Settings.Xf)
 	log.Printf("\n\nNumeri generati: %v\n\n", data)
@@ -76,4 +83,5 @@ func main() {
 
 	// Combina i risultati finali
 	master.CombineOutputFiles()
+	utils.ResetState()
 }

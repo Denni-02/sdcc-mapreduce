@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"strconv"
 	"sync"
+	"fmt"
 )
 
 var statusMu sync.Mutex
@@ -126,7 +127,7 @@ func SaveStatusAfterChunk(i int) {
 
 	statusMu.Lock()
 	defer statusMu.Unlock()
-	
+
 	filePath := "state/status.json"
 
 	// Leggi lo stato attuale
@@ -175,3 +176,70 @@ func SaveStatusAfterChunk(i int) {
 		}
 	}
 }
+
+func PhaseAlreadyDone() bool {
+	filePath := "state/status.json"
+
+	// Se S3 abilitato, scarica la versione aggiornata
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		s3Path := "s3://" + bucket + "/state/status.json"
+		cmd := exec.Command("aws", "s3", "cp", s3Path, filePath)
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Printf("Errore download status.json da S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Printf("[STATE] Scaricato status.json aggiornato da S3")
+		}
+	}
+
+	// Apre il file locale
+	file, err := os.Open(filePath)
+	if err != nil {
+		log.Printf("Errore apertura %s: %v", filePath, err)
+		return false
+	}
+	defer file.Close()
+
+	// Decodifica
+	var status map[string]string
+	decoder := json.NewDecoder(file)
+	err = decoder.Decode(&status)
+	if err != nil {
+		log.Printf("Errore decoding JSON %s: %v", filePath, err)
+		return false
+	}
+
+	// Controlla se tutti sono "done"
+	for _, v := range status {
+		if v != "done" {
+			return false
+		}
+	}
+	return true
+}
+
+func ResetState() {
+	filePath := "state/status.json"
+
+	// Rimuovi file locale
+	if err := os.Remove(filePath); err == nil {
+		log.Printf("[STATE] File %s rimosso", filePath)
+	} else if !os.IsNotExist(err) {
+		log.Printf("Errore durante la rimozione di %s: %v", filePath, err)
+	}
+
+	// Se S3 attivo, rimuovi anche da S3
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		s3Path := fmt.Sprintf("s3://%s/state/status.json", bucket)
+		cmd := exec.Command("aws", "s3", "rm", s3Path)
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Printf("Errore rimozione %s da S3: %v\nOutput: %s", s3Path, err, string(output))
+		} else {
+			log.Printf("File rimosso da S3: %s", s3Path)
+		}
+	}
+}
+

@@ -1,48 +1,53 @@
-[MASTER] 2025/07/08 16:38:47 Attendo la registrazione di 3 mapper e 3 reducer...
-[MASTER] 2025/07/08 16:38:47 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/08 16:38:47 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/08 16:38:47 Registrato nuovo worker: 14abe3bd6286:9001 (mapper)
-[MASTER] 2025/07/08 16:38:47 Registrato nuovo worker: 7257aaa25a7d:9001 (reducer)
-[MASTER] 2025/07/08 16:38:47 Registrato nuovo worker: 8f00aae88730:9001 (mapper)
-[MASTER] 2025/07/08 16:38:48 Registrato nuovo worker: f60a9e299547:9001 (reducer)
-[MASTER] 2025/07/08 16:38:48 Registrato nuovo worker: c31384fe4964:9001 (mapper)
-[MASTER] 2025/07/08 16:38:48 Registrato nuovo worker: 59c5008ba88d:9001 (reducer)
-[MASTER] 2025/07/08 16:38:48 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/08 16:38:48 Tutti i worker sono registrati, si può partire.
-[MASTER] 2025/07/08 16:38:48 
+[MASTER] 2025/07/08 16:55:41 Attendo la registrazione di 3 mapper e 3 reducer...
+[MASTER] 2025/07/08 16:55:41 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/08 16:55:41 Master RPC server in ascolto su :9000 per registrazioni
+[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: f1c10ca695d8:9001 (mapper)
+[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: 52407d4fcb3b:9001 (reducer)
+[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: e204d8656ec8:9001 (mapper)
+[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: b9fd7b94e185:9001 (reducer)
+[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: 27380ec6870e:9001 (mapper)
+[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: 1fec096e9cab:9001 (reducer)
+[MASTER] 2025/07/08 16:55:42 Registrati finora: 3 mapper, 3 reducer
+[MASTER] 2025/07/08 16:55:42 Tutti i worker sono registrati, si può partire.
+[MASTER] 2025/07/08 16:55:42 Errore download status.json da S3: exit status 1
+Output: fatal error: An error occurred (404) when calling the HeadObject operation: Key "state/status.json" does not exist
+[MASTER] 2025/07/08 16:55:42 Errore apertura state/status.json: open state/status.json: no such file or directory
+[MASTER] 2025/07/08 16:55:42 
 
-Numeri generati: [9 16 13 31 35 31 43 22 4 23 49 23 25 15 11 30 13 42 31 13 10 26 48 10 47 14 15 12 10 22 45 48 18 6 33 44 41 29 36 27 5 36 16 17 26 24 4 34 44 40 33 31 47 8 9 48 17 20 32 39 40 45 47 19 40 10 17 24 44 1 25 28 12 1 27 44 36 1 26 23 38 9 49 16 21 17 44 6 6 20 43 7 7 44 32 32 49 29 4 7]
+Numeri generati: [1 22 48 37 24 19 4 22 47 3 4 1 23 39 29 48 26 2 49 39 4 40 17 29 41 9 7 32 31 2 47 8 5 29 46 9 2 43 25 49 27 27 43 9 50 42 29 7 34 40 46 7 18 34 23 39 11 46 13 38 46 29 20 31 42 41 2 20 8 50 19 13 20 31 39 40 29 22 36 42 18 20 27 30 49 42 30 25 9 26 27 22 38 5 29 2 36 39 41 26]
 
-[MASTER] 2025/07/08 16:38:48 [STATE] Dati salvati in state/data.json
-[MASTER] 2025/07/08 16:38:49 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/data.json
-[MASTER] 2025/07/08 16:38:49 Chunk distribuiti ai mapper: [[9 16 13 31 35 31 43 22 4 23 49 23 25 15 11 30 13 42 31 13 10 26 48 10 47 14 15 12 10 22 45 48 18 6] [33 44 41 29 36 27 5 36 16 17 26 24 4 34 44 40 33 31 47 8 9 48 17 20 32 39 40 45 47 19 40 10 17 24] [44 1 25 28 12 1 27 44 36 1 26 23 38 9 49 16 21 17 44 6 6 20 43 7 7 44 32 32 49 29 4 7]]
+[MASTER] 2025/07/08 16:55:42 [STATE] Dati salvati in state/data.json
+[MASTER] 2025/07/08 16:55:43 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/data.json
+[MASTER] 2025/07/08 16:55:43 Chunk distribuiti ai mapper: [[1 22 48 37 24 19 4 22 47 3 4 1 23 39 29 48 26 2 49 39 4 40 17 29 41 9 7 32 31 2 47 8 5 29] [46 9 2 43 25 49 27 27 43 9 50 42 29 7 34 40 46 7 18 34 23 39 11 46 13 38 46 29 20 31 42 41 2 20] [8 50 19 13 20 31 39 40 29 22 36 42 18 20 27 30 49 42 30 25 9 26 27 22 38 5 29 2 36 39 41 26]]
 
-[MASTER] 2025/07/08 16:38:49 [STATE] Chunk salvati in state/chunks.json
-[MASTER] 2025/07/08 16:38:50 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/chunks.json
-[MASTER] 2025/07/08 16:38:50 [STATE] Stato inizializzato in state/status.json
-[MASTER] 2025/07/08 16:38:52 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/08 16:38:52 sample = [36 23 25 28 32 23 23 4 34 26]
-[MASTER] 2025/07/08 16:38:52 sample ordinato= [4 23 23 23 25 26 28 32 34 36]
-[MASTER] 2025/07/08 16:38:52 ranges= [23 28]
-[MASTER] 2025/07/08 16:38:52 ranges = [23 28]
-[MASTER] 2025/07/08 16:38:52 Reducer 7257aaa25a7d:9001 gestisce l'intervallo [1, 23]
-[MASTER] 2025/07/08 16:38:52 Reducer f60a9e299547:9001 gestisce l'intervallo [23, 28]
-[MASTER] 2025/07/08 16:38:52 Reducer 59c5008ba88d:9001 gestisce l'intervallo [28, 51]
-[MASTER] 2025/07/08 16:38:52 Reducer effettivamente utilizzati: 3
-2025/07/08 16:39:12 [MAP-00] Completato con successo da 8f00aae88730:9001
-[MASTER] 2025/07/08 16:39:12 MAP-00 completato
-2025/07/08 16:39:12 [MAP-02] Completato con successo da 14abe3bd6286:9001
-[MASTER] 2025/07/08 16:39:12 MAP-02 completato
-2025/07/08 16:39:12 [MAP-01] Completato con successo da c31384fe4964:9001
-[MASTER] 2025/07/08 16:39:12 MAP-01 completato
-[MASTER] 2025/07/08 16:39:12 [STATE] Stato aggiornato: chunk 0 → done
-[MASTER] 2025/07/08 16:39:13 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/08 16:39:13 [STATE] Stato aggiornato: chunk 2 → done
-[MASTER] 2025/07/08 16:39:14 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/08 16:39:14 [STATE] Stato aggiornato: chunk 1 → done
-[MASTER] 2025/07/08 16:39:15 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/08 16:39:15 Fase di Map completata.
-[MASTER] 2025/07/08 16:39:15 Unisco il file temporaneo: output/temp_7257aaa25a7d_9001.txt
-[MASTER] 2025/07/08 16:39:15 Unisco il file temporaneo: output/temp_f60a9e299547_9001.txt
-[MASTER] 2025/07/08 16:39:15 Unisco il file temporaneo: output/temp_59c5008ba88d_9001.txt
-[MASTER] 2025/07/08 16:39:15 Output finale scritto in: output/final_output.txt
+[MASTER] 2025/07/08 16:55:43 [STATE] Chunk salvati in state/chunks.json
+[MASTER] 2025/07/08 16:55:44 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/chunks.json
+[MASTER] 2025/07/08 16:55:44 [STATE] Stato inizializzato in state/status.json
+[MASTER] 2025/07/08 16:55:46 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/08 16:55:46 sample = [40 42 27 22 29 2 50 9 39 9]
+[MASTER] 2025/07/08 16:55:46 sample ordinato= [2 9 9 22 27 29 39 40 42 50]
+[MASTER] 2025/07/08 16:55:46 ranges= [22 39]
+[MASTER] 2025/07/08 16:55:46 ranges = [22 39]
+[MASTER] 2025/07/08 16:55:46 Reducer 52407d4fcb3b:9001 gestisce l'intervallo [1, 22]
+[MASTER] 2025/07/08 16:55:46 Reducer b9fd7b94e185:9001 gestisce l'intervallo [22, 39]
+[MASTER] 2025/07/08 16:55:46 Reducer 1fec096e9cab:9001 gestisce l'intervallo [39, 51]
+[MASTER] 2025/07/08 16:55:46 Reducer effettivamente utilizzati: 3
+2025/07/08 16:56:06 [MAP-00] Completato con successo da e204d8656ec8:9001
+[MASTER] 2025/07/08 16:56:06 MAP-00 completato
+2025/07/08 16:56:06 [MAP-02] Completato con successo da 27380ec6870e:9001
+[MASTER] 2025/07/08 16:56:06 [STATE] Stato aggiornato: chunk 0 → done
+[MASTER] 2025/07/08 16:56:06 MAP-02 completato
+2025/07/08 16:56:06 [MAP-01] Completato con successo da f1c10ca695d8:9001
+[MASTER] 2025/07/08 16:56:06 MAP-01 completato
+[MASTER] 2025/07/08 16:56:07 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/08 16:56:07 [STATE] Stato aggiornato: chunk 2 → done
+[MASTER] 2025/07/08 16:56:08 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/08 16:56:08 [STATE] Stato aggiornato: chunk 1 → done
+[MASTER] 2025/07/08 16:56:09 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/08 16:56:09 Fase di Map completata.
+[MASTER] 2025/07/08 16:56:09 Unisco il file temporaneo: output/temp_52407d4fcb3b_9001.txt
+[MASTER] 2025/07/08 16:56:09 Unisco il file temporaneo: output/temp_b9fd7b94e185_9001.txt
+[MASTER] 2025/07/08 16:56:09 Unisco il file temporaneo: output/temp_1fec096e9cab_9001.txt
+[MASTER] 2025/07/08 16:56:09 Output finale scritto in: output/final_output.txt
+[MASTER] 2025/07/08 16:56:09 [STATE] File state/status.json rimosso
+[MASTER] 2025/07/08 16:56:10 File rimosso da S3: s3://sdcc-mapreduce-recovery/state/status.json
