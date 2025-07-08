@@ -36,18 +36,20 @@ Data la chiave `sdcc-key.pem` salvata in `~/.ssh` con permessi corretti, si si c
 ssh -i ~/.ssh/sdcc-key.pem ec2-user@<IP_EC2>
 ```
 
-### 3. Clonare il progetto (se necessario)
+### 3. Entra nella cartella del progetto
+
+Se è già presente:
+
+```bash
+cd sdcc-mapreduce
+git pull
+```
+
+Altrimenti:
 
 ```bash
 git clone https://github.com/Denni-02/sdcc-mapreduce.git
 ```
-
-Altrimenti semplicemente:
-
-```bash
-cd sdcc-mapreduce
-```
-
 
 ### 4. Imppstare credenziali AWS
 
