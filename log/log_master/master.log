@@ -1,42 +1,48 @@
-[MASTER] 2025/07/08 15:07:38 Attendo la registrazione di 3 mapper e 3 reducer...
-[MASTER] 2025/07/08 15:07:38 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/08 15:07:38 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/08 15:07:39 Registrato nuovo worker: 68d1be76754a:9001 (mapper)
-[MASTER] 2025/07/08 15:07:39 Registrato nuovo worker: e0c25a5269f3:9001 (reducer)
-[MASTER] 2025/07/08 15:07:39 Registrati finora: 1 mapper, 1 reducer
-[MASTER] 2025/07/08 15:07:40 Registrato nuovo worker: 781b9c5fddf6:9001 (mapper)
-[MASTER] 2025/07/08 15:07:40 Registrato nuovo worker: 160e642ab35d:9001 (reducer)
-[MASTER] 2025/07/08 15:07:40 Registrati finora: 2 mapper, 2 reducer
-[MASTER] 2025/07/08 15:07:41 Registrato nuovo worker: b349de9e4465:9001 (mapper)
-[MASTER] 2025/07/08 15:07:41 Registrato nuovo worker: ab64e2e76f82:9001 (reducer)
-[MASTER] 2025/07/08 15:07:41 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/08 15:07:41 Tutti i worker sono registrati, si può partire.
-[MASTER] 2025/07/08 15:07:41 
+[MASTER] 2025/07/08 16:38:47 Attendo la registrazione di 3 mapper e 3 reducer...
+[MASTER] 2025/07/08 16:38:47 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/08 16:38:47 Master RPC server in ascolto su :9000 per registrazioni
+[MASTER] 2025/07/08 16:38:47 Registrato nuovo worker: 14abe3bd6286:9001 (mapper)
+[MASTER] 2025/07/08 16:38:47 Registrato nuovo worker: 7257aaa25a7d:9001 (reducer)
+[MASTER] 2025/07/08 16:38:47 Registrato nuovo worker: 8f00aae88730:9001 (mapper)
+[MASTER] 2025/07/08 16:38:48 Registrato nuovo worker: f60a9e299547:9001 (reducer)
+[MASTER] 2025/07/08 16:38:48 Registrato nuovo worker: c31384fe4964:9001 (mapper)
+[MASTER] 2025/07/08 16:38:48 Registrato nuovo worker: 59c5008ba88d:9001 (reducer)
+[MASTER] 2025/07/08 16:38:48 Registrati finora: 3 mapper, 3 reducer
+[MASTER] 2025/07/08 16:38:48 Tutti i worker sono registrati, si può partire.
+[MASTER] 2025/07/08 16:38:48 
 
-Numeri generati: [38 13 19 48 14 8 19 45 47 6 47 34 13 2 19 39 41 11 47 28 29 42 47 49 39 36 18 38 48 35 47 23 43 33 39 1 10 32 43 17 15 16 5 49 32 35 25 13 31 36 39 27 10 28 15 14 24 11 31 8 43 50 41 10 2 12 49 43 47 15 30 20 27 42 39 5 8 49 20 28 22 30 40 22 24 11 11 13 15 6 40 40 49 14 4 17 44 37 50 14]
+Numeri generati: [9 16 13 31 35 31 43 22 4 23 49 23 25 15 11 30 13 42 31 13 10 26 48 10 47 14 15 12 10 22 45 48 18 6 33 44 41 29 36 27 5 36 16 17 26 24 4 34 44 40 33 31 47 8 9 48 17 20 32 39 40 45 47 19 40 10 17 24 44 1 25 28 12 1 27 44 36 1 26 23 38 9 49 16 21 17 44 6 6 20 43 7 7 44 32 32 49 29 4 7]
 
-[MASTER] 2025/07/08 15:07:41 [STATE] Dati salvati in state/data.json
-[MASTER] 2025/07/08 15:07:43 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/data.json
-[MASTER] 2025/07/08 15:07:43 Chunk distribuiti ai mapper: [[38 13 19 48 14 8 19 45 47 6 47 34 13 2 19 39 41 11 47 28 29 42 47 49 39 36 18 38 48 35 47 23 43 33] [39 1 10 32 43 17 15 16 5 49 32 35 25 13 31 36 39 27 10 28 15 14 24 11 31 8 43 50 41 10 2 12 49 43] [47 15 30 20 27 42 39 5 8 49 20 28 22 30 40 22 24 11 11 13 15 6 40 40 49 14 4 17 44 37 50 14]]
+[MASTER] 2025/07/08 16:38:48 [STATE] Dati salvati in state/data.json
+[MASTER] 2025/07/08 16:38:49 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/data.json
+[MASTER] 2025/07/08 16:38:49 Chunk distribuiti ai mapper: [[9 16 13 31 35 31 43 22 4 23 49 23 25 15 11 30 13 42 31 13 10 26 48 10 47 14 15 12 10 22 45 48 18 6] [33 44 41 29 36 27 5 36 16 17 26 24 4 34 44 40 33 31 47 8 9 48 17 20 32 39 40 45 47 19 40 10 17 24] [44 1 25 28 12 1 27 44 36 1 26 23 38 9 49 16 21 17 44 6 6 20 43 7 7 44 32 32 49 29 4 7]]
 
-[MASTER] 2025/07/08 15:07:43 [STATE] Chunk salvati in state/chunks.json
-[MASTER] 2025/07/08 15:07:43 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/chunks.json
-[MASTER] 2025/07/08 15:07:43 sample = [24 19 47 35 41 8 37 6 8 31]
-[MASTER] 2025/07/08 15:07:43 sample ordinato= [6 8 8 19 24 31 35 37 41 47]
-[MASTER] 2025/07/08 15:07:43 ranges= [19 35]
-[MASTER] 2025/07/08 15:07:43 ranges = [19 35]
-[MASTER] 2025/07/08 15:07:43 Reducer e0c25a5269f3:9001 gestisce l'intervallo [1, 19]
-[MASTER] 2025/07/08 15:07:43 Reducer 160e642ab35d:9001 gestisce l'intervallo [19, 35]
-[MASTER] 2025/07/08 15:07:43 Reducer ab64e2e76f82:9001 gestisce l'intervallo [35, 51]
-[MASTER] 2025/07/08 15:07:43 Reducer effettivamente utilizzati: 3
-2025/07/08 15:08:03 [MAP-01] Completato con successo da b349de9e4465:9001
-[MASTER] 2025/07/08 15:08:03 MAP-01 completato
-2025/07/08 15:08:03 [MAP-00] Completato con successo da 781b9c5fddf6:9001
-[MASTER] 2025/07/08 15:08:03 MAP-00 completato
-2025/07/08 15:08:03 [MAP-02] Completato con successo da 68d1be76754a:9001
-[MASTER] 2025/07/08 15:08:03 MAP-02 completato
-[MASTER] 2025/07/08 15:08:03 Fase di Map completata.
-[MASTER] 2025/07/08 15:08:03 Unisco il file temporaneo: output/temp_e0c25a5269f3_9001.txt
-[MASTER] 2025/07/08 15:08:03 Unisco il file temporaneo: output/temp_160e642ab35d_9001.txt
-[MASTER] 2025/07/08 15:08:03 Unisco il file temporaneo: output/temp_ab64e2e76f82_9001.txt
-[MASTER] 2025/07/08 15:08:03 Output finale scritto in: output/final_output.txt
+[MASTER] 2025/07/08 16:38:49 [STATE] Chunk salvati in state/chunks.json
+[MASTER] 2025/07/08 16:38:50 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/chunks.json
+[MASTER] 2025/07/08 16:38:50 [STATE] Stato inizializzato in state/status.json
+[MASTER] 2025/07/08 16:38:52 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/08 16:38:52 sample = [36 23 25 28 32 23 23 4 34 26]
+[MASTER] 2025/07/08 16:38:52 sample ordinato= [4 23 23 23 25 26 28 32 34 36]
+[MASTER] 2025/07/08 16:38:52 ranges= [23 28]
+[MASTER] 2025/07/08 16:38:52 ranges = [23 28]
+[MASTER] 2025/07/08 16:38:52 Reducer 7257aaa25a7d:9001 gestisce l'intervallo [1, 23]
+[MASTER] 2025/07/08 16:38:52 Reducer f60a9e299547:9001 gestisce l'intervallo [23, 28]
+[MASTER] 2025/07/08 16:38:52 Reducer 59c5008ba88d:9001 gestisce l'intervallo [28, 51]
+[MASTER] 2025/07/08 16:38:52 Reducer effettivamente utilizzati: 3
+2025/07/08 16:39:12 [MAP-00] Completato con successo da 8f00aae88730:9001
+[MASTER] 2025/07/08 16:39:12 MAP-00 completato
+2025/07/08 16:39:12 [MAP-02] Completato con successo da 14abe3bd6286:9001
+[MASTER] 2025/07/08 16:39:12 MAP-02 completato
+2025/07/08 16:39:12 [MAP-01] Completato con successo da c31384fe4964:9001
+[MASTER] 2025/07/08 16:39:12 MAP-01 completato
+[MASTER] 2025/07/08 16:39:12 [STATE] Stato aggiornato: chunk 0 → done
+[MASTER] 2025/07/08 16:39:13 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/08 16:39:13 [STATE] Stato aggiornato: chunk 2 → done
+[MASTER] 2025/07/08 16:39:14 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/08 16:39:14 [STATE] Stato aggiornato: chunk 1 → done
+[MASTER] 2025/07/08 16:39:15 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/08 16:39:15 Fase di Map completata.
+[MASTER] 2025/07/08 16:39:15 Unisco il file temporaneo: output/temp_7257aaa25a7d_9001.txt
+[MASTER] 2025/07/08 16:39:15 Unisco il file temporaneo: output/temp_f60a9e299547_9001.txt
+[MASTER] 2025/07/08 16:39:15 Unisco il file temporaneo: output/temp_59c5008ba88d_9001.txt
+[MASTER] 2025/07/08 16:39:15 Output finale scritto in: output/final_output.txt

@@ -1,0 +1,8 @@
+[WORKER] 2025/07/08 16:38:48 Registrazione avvenuta con successo (reducer - f60a9e299547:9001)
+[WORKER] 2025/07/08 16:38:48 Worker in ascolto su f60a9e299547:9001
+[WORKER] 2025/07/08 16:39:12 
+Reducer ha ricevuto i seguenti chunk: [24 25 26 27] per Owner f60a9e299547:9001
+[WORKER] 2025/07/08 16:39:12 
+Reducer ha ricevuto i seguenti chunk: [23 23 23 24 25 26 26 27] per Owner f60a9e299547:9001
+[WORKER] 2025/07/08 16:39:12 Reducer ha scritto i risultati in: output/temp_f60a9e299547_9001.txt
+[WORKER] 2025/07/08 16:39:12 Reducer ha scritto i risultati in: output/temp_f60a9e299547_9001.txt

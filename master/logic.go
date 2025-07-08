@@ -260,6 +260,7 @@ func (m *Master) ExecuteMapPhase(chunks [][]int, reducerRanges map[string][2]int
 				log.Printf("%s fallito: %v\n", logPrefix, err)
 			} else {
 				log.Printf("%s completato\n", logPrefix)
+				utils.SaveStatusAfterChunk(chunkIndex)
 			}
 		}(i, chunk)
 	}

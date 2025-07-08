@@ -5,7 +5,6 @@ import (
 	"log"
 	"net"
 	"net/rpc"
-	"os"
 	"time"
 	"sdcc-mapreduce/utils"
 )
@@ -64,6 +63,7 @@ func main() {
 	chunks := master.SplitData(data)
 	log.Printf("Chunk distribuiti ai mapper: %v\n\n", chunks)
 	utils.SaveChunksToFile(chunks)
+	utils.InitStatusFile(len(chunks))
 
 	// Mappa i reducer agli intervalli di competenza
 	reducerRanges := master.MapReducersToRanges(data)
@@ -76,5 +76,4 @@ func main() {
 
 	// Combina i risultati finali
 	master.CombineOutputFiles()
-        os.Exit(0)
 }

@@ -26,4 +26,4 @@ docker-compose build
 echo "Avvio con $NUM_MAPPERS mapper e $NUM_REDUCERS reducer..."
 docker-compose up --scale mapper=$NUM_MAPPERS --scale reducer=$NUM_REDUCERS
 
-echo "Sistema avviato."
+
