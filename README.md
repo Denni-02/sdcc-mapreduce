@@ -53,7 +53,13 @@ git clone https://github.com/Denni-02/sdcc-mapreduce.git
 
 ### 4. Imppstare credenziali AWS
 
-Crea un file .env nella root, incolla le credenziali temporanee dal Lab e il nome del bucket S3:
+Esegui lo script helper che crea lo scheletro del file .env:
+
+```bash
+./script/init_env.sh
+```
+
+Poi apri .env e incolla le credenziali temporanee dal Lab e il nome del bucket S3:
 
 ```bash
 ENABLE_S3=true
