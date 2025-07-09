@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🛠️ [FAULT INJECTION] Cerco un reducer da uccidere..."
+echo "[FAULT INJECTION] Cerco un reducer da uccidere..."
 sleep 2
 
 # Trova un container reducer a caso
@@ -11,7 +11,7 @@ if [ -z "$TARGET" ]; then
   exit 1
 fi
 
-echo "🔪 Uccido il reducer: $TARGET"
+echo "Uccido il reducer: $TARGET"
 docker kill "$TARGET"
 
 echo "Reducer $TARGET ucciso con successo."

@@ -1,53 +1,69 @@
-[MASTER] 2025/07/08 16:55:41 Attendo la registrazione di 3 mapper e 3 reducer...
-[MASTER] 2025/07/08 16:55:41 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/08 16:55:41 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: f1c10ca695d8:9001 (mapper)
-[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: 52407d4fcb3b:9001 (reducer)
-[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: e204d8656ec8:9001 (mapper)
-[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: b9fd7b94e185:9001 (reducer)
-[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: 27380ec6870e:9001 (mapper)
-[MASTER] 2025/07/08 16:55:41 Registrato nuovo worker: 1fec096e9cab:9001 (reducer)
-[MASTER] 2025/07/08 16:55:42 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/08 16:55:42 Tutti i worker sono registrati, si può partire.
-[MASTER] 2025/07/08 16:55:42 Errore download status.json da S3: exit status 1
+[MASTER] 2025/07/09 14:07:19 Attendo la registrazione di 3 mapper e 3 reducer...
+[MASTER] 2025/07/09 14:07:19 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:19 Master RPC server in ascolto su :9000 per registrazioni
+[MASTER] 2025/07/09 14:07:20 Registrato nuovo worker: 6e3b62d19b5b:9001 (mapper)
+[MASTER] 2025/07/09 14:07:20 Registrato nuovo worker: 2da1c960bbaa:9001 (reducer)
+[MASTER] 2025/07/09 14:07:20 Registrato nuovo worker: e2b9a7dcf7a6:9001 (mapper)
+[MASTER] 2025/07/09 14:07:20 Registrati finora: 2 mapper, 1 reducer
+[MASTER] 2025/07/09 14:07:20 Registrato nuovo worker: fb577ae09a02:9001 (reducer)
+[MASTER] 2025/07/09 14:07:21 Registrato nuovo worker: 79881e06ebfe:9001 (mapper)
+[MASTER] 2025/07/09 14:07:21 Registrato nuovo worker: d775e3f8b5d1:9001 (reducer)
+[MASTER] 2025/07/09 14:07:21 Registrati finora: 3 mapper, 3 reducer
+[MASTER] 2025/07/09 14:07:21 Tutti i worker sono registrati, si può partire.
+[MASTER] 2025/07/09 14:07:23 Errore download status.json da S3: exit status 1
 Output: fatal error: An error occurred (404) when calling the HeadObject operation: Key "state/status.json" does not exist
-[MASTER] 2025/07/08 16:55:42 Errore apertura state/status.json: open state/status.json: no such file or directory
-[MASTER] 2025/07/08 16:55:42 
+[MASTER] 2025/07/09 14:07:23 [STATE] Nessun file di stato trovato: skip PhaseAlreadyDone.
+[MASTER] 2025/07/09 14:07:23 
 
-Numeri generati: [1 22 48 37 24 19 4 22 47 3 4 1 23 39 29 48 26 2 49 39 4 40 17 29 41 9 7 32 31 2 47 8 5 29 46 9 2 43 25 49 27 27 43 9 50 42 29 7 34 40 46 7 18 34 23 39 11 46 13 38 46 29 20 31 42 41 2 20 8 50 19 13 20 31 39 40 29 22 36 42 18 20 27 30 49 42 30 25 9 26 27 22 38 5 29 2 36 39 41 26]
+Numeri generati: [48 40 35 15 24 46 2 35 28 50 23 21 10 16 1 48 24 16 34 50 28 29 15 10 40 10 24 3 14 23 49 32 1 9 42 48 15 32 24 4 28 13 31 27 7 10 14 20 36 10 39 24 31 46 32 40 46 46 16 39 26 43 11 22 36 13 21 50 13 25 3 28 24 45 9 15 40 27 28 16 46 42 42 14 32 35 26 45 37 4 30 12 16 5 37 5 6 4 9 15]
 
-[MASTER] 2025/07/08 16:55:42 [STATE] Dati salvati in state/data.json
-[MASTER] 2025/07/08 16:55:43 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/data.json
-[MASTER] 2025/07/08 16:55:43 Chunk distribuiti ai mapper: [[1 22 48 37 24 19 4 22 47 3 4 1 23 39 29 48 26 2 49 39 4 40 17 29 41 9 7 32 31 2 47 8 5 29] [46 9 2 43 25 49 27 27 43 9 50 42 29 7 34 40 46 7 18 34 23 39 11 46 13 38 46 29 20 31 42 41 2 20] [8 50 19 13 20 31 39 40 29 22 36 42 18 20 27 30 49 42 30 25 9 26 27 22 38 5 29 2 36 39 41 26]]
+[MASTER] 2025/07/09 14:07:23 [STATE] Dati salvati in state/data.json
+[MASTER] 2025/07/09 14:07:24 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/data.json
+[MASTER] 2025/07/09 14:07:24 Chunk distribuiti ai mapper: [[48 40 35 15 24 46 2 35 28 50 23 21 10 16 1 48 24 16 34 50 28 29 15 10 40 10 24 3 14 23 49 32 1 9] [42 48 15 32 24 4 28 13 31 27 7 10 14 20 36 10 39 24 31 46 32 40 46 46 16 39 26 43 11 22 36 13 21 50] [13 25 3 28 24 45 9 15 40 27 28 16 46 42 42 14 32 35 26 45 37 4 30 12 16 5 37 5 6 4 9 15]]
 
-[MASTER] 2025/07/08 16:55:43 [STATE] Chunk salvati in state/chunks.json
-[MASTER] 2025/07/08 16:55:44 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/chunks.json
-[MASTER] 2025/07/08 16:55:44 [STATE] Stato inizializzato in state/status.json
-[MASTER] 2025/07/08 16:55:46 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/08 16:55:46 sample = [40 42 27 22 29 2 50 9 39 9]
-[MASTER] 2025/07/08 16:55:46 sample ordinato= [2 9 9 22 27 29 39 40 42 50]
-[MASTER] 2025/07/08 16:55:46 ranges= [22 39]
-[MASTER] 2025/07/08 16:55:46 ranges = [22 39]
-[MASTER] 2025/07/08 16:55:46 Reducer 52407d4fcb3b:9001 gestisce l'intervallo [1, 22]
-[MASTER] 2025/07/08 16:55:46 Reducer b9fd7b94e185:9001 gestisce l'intervallo [22, 39]
-[MASTER] 2025/07/08 16:55:46 Reducer 1fec096e9cab:9001 gestisce l'intervallo [39, 51]
-[MASTER] 2025/07/08 16:55:46 Reducer effettivamente utilizzati: 3
-2025/07/08 16:56:06 [MAP-00] Completato con successo da e204d8656ec8:9001
-[MASTER] 2025/07/08 16:56:06 MAP-00 completato
-2025/07/08 16:56:06 [MAP-02] Completato con successo da 27380ec6870e:9001
-[MASTER] 2025/07/08 16:56:06 [STATE] Stato aggiornato: chunk 0 → done
-[MASTER] 2025/07/08 16:56:06 MAP-02 completato
-2025/07/08 16:56:06 [MAP-01] Completato con successo da f1c10ca695d8:9001
-[MASTER] 2025/07/08 16:56:06 MAP-01 completato
-[MASTER] 2025/07/08 16:56:07 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/08 16:56:07 [STATE] Stato aggiornato: chunk 2 → done
-[MASTER] 2025/07/08 16:56:08 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/08 16:56:08 [STATE] Stato aggiornato: chunk 1 → done
-[MASTER] 2025/07/08 16:56:09 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/08 16:56:09 Fase di Map completata.
-[MASTER] 2025/07/08 16:56:09 Unisco il file temporaneo: output/temp_52407d4fcb3b_9001.txt
-[MASTER] 2025/07/08 16:56:09 Unisco il file temporaneo: output/temp_b9fd7b94e185_9001.txt
-[MASTER] 2025/07/08 16:56:09 Unisco il file temporaneo: output/temp_1fec096e9cab_9001.txt
-[MASTER] 2025/07/08 16:56:09 Output finale scritto in: output/final_output.txt
-[MASTER] 2025/07/08 16:56:09 [STATE] File state/status.json rimosso
-[MASTER] 2025/07/08 16:56:10 File rimosso da S3: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/09 14:07:24 [STATE] Chunk salvati in state/chunks.json
+[MASTER] 2025/07/09 14:07:25 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/chunks.json
+[MASTER] 2025/07/09 14:07:25 [STATE] Stato inizializzato in state/status.json
+[MASTER] 2025/07/09 14:07:26 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
+[MASTER] 2025/07/09 14:07:26 sample = [10 4 13 22 13 16 3 42 39 39]
+[MASTER] 2025/07/09 14:07:26 sample ordinato= [3 4 10 13 13 16 22 39 39 42]
+[MASTER] 2025/07/09 14:07:26 ranges= [13 22]
+[MASTER] 2025/07/09 14:07:26 ranges = [13 22]
+[MASTER] 2025/07/09 14:07:26 Reducer 2da1c960bbaa:9001 gestisce l'intervallo [1, 13]
+[MASTER] 2025/07/09 14:07:26 Reducer fb577ae09a02:9001 gestisce l'intervallo [13, 22]
+[MASTER] 2025/07/09 14:07:26 Reducer d775e3f8b5d1:9001 gestisce l'intervallo [22, 51]
+[MASTER] 2025/07/09 14:07:26 Reducer effettivamente utilizzati: 3
+[MASTER] 2025/07/09 14:07:36 Attendo la registrazione di 3 mapper e 3 reducer...
+[MASTER] 2025/07/09 14:07:36 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:36 Master RPC server in ascolto su :9000 per registrazioni
+[MASTER] 2025/07/09 14:07:37 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:38 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:39 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:40 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:41 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:42 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:43 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:44 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:45 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:46 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:47 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:48 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:49 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:50 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:51 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:52 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:53 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:54 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:55 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:56 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:57 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:58 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:07:59 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:08:00 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:08:01 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:08:02 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:08:03 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:08:04 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:08:05 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:08:06 Registrati finora: 0 mapper, 0 reducer
+[MASTER] 2025/07/09 14:08:06 Timeout: non tutti i worker si sono registrati in 30 secondi

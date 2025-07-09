@@ -193,6 +193,11 @@ func PhaseAlreadyDone() bool {
 		}
 	}
 
+	if !StateFilesExist() {
+		log.Println("[STATE] Nessun file di stato trovato: skip PhaseAlreadyDone.")
+		return false
+	}
+
 	// Apre il file locale
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -243,3 +248,122 @@ func ResetState() {
 	}
 }
 
+func RecoverPendingChunks() [][]int {
+	statusMu.Lock()
+	defer statusMu.Unlock()
+
+	statusPath := "state/status.json"
+	chunksPath := "state/chunks.json"
+
+	// Scarica da S3 se abilitato
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+
+		// Prova a scaricare status.json
+		cmd := exec.Command("aws", "s3", "cp", fmt.Sprintf("s3://%s/state/status.json", bucket), statusPath)
+		if output, err := cmd.CombinedOutput(); err != nil {
+			log.Printf("[RECOVERY] Warning: status.json non trovato su S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Println("[RECOVERY] status.json scaricato da S3")
+		}
+
+		// Prova a scaricare chunks.json
+		cmd = exec.Command("aws", "s3", "cp", fmt.Sprintf("s3://%s/state/chunks.json", bucket), chunksPath)
+		if output, err := cmd.CombinedOutput(); err != nil {
+			log.Printf("[RECOVERY] Warning: chunks.json non trovato su S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Println("[RECOVERY] chunks.json scaricato da S3")
+		}
+	}
+
+	// Verifica se i file esistono localmente
+	if _, err := os.Stat(statusPath); os.IsNotExist(err) {
+		log.Println("[RECOVERY] Stato assente: nessun chunk pending da recuperare.")
+		return [][]int{}
+	}
+
+	if _, err := os.Stat(chunksPath); os.IsNotExist(err) {
+		log.Println("[RECOVERY] Errore: chunks.json assente. Recovery impossibile.")
+		return [][]int{}
+	}
+
+	// Decodifica status.json
+	statusFile, err := os.Open(statusPath)
+	if err != nil {
+		log.Printf("[RECOVERY] Errore apertura %s: %v", statusPath, err)
+		return [][]int{}
+	}
+	defer statusFile.Close()
+
+	var status map[string]string
+	if err := json.NewDecoder(statusFile).Decode(&status); err != nil {
+		log.Printf("[RECOVERY] Errore decoding status.json: %v", err)
+		return [][]int{}
+	}
+
+	// Decodifica chunks.json
+	chunksFile, err := os.Open(chunksPath)
+	if err != nil {
+		log.Printf("[RECOVERY] Errore apertura %s: %v", chunksPath, err)
+		return [][]int{}
+	}
+	defer chunksFile.Close()
+
+	var chunks [][]int
+	if err := json.NewDecoder(chunksFile).Decode(&chunks); err != nil {
+		log.Printf("[RECOVERY] Errore decoding chunks.json: %v", err)
+		return [][]int{}
+	}
+
+	// Estrai i pending
+	var pending [][]int
+	for i, chunk := range chunks {
+		if status[strconv.Itoa(i)] == "pending" {
+			pending = append(pending, chunk)
+		}
+	}
+
+	log.Printf("[RECOVERY] Trovati %d chunk pending", len(pending))
+	return pending
+}
+
+func LoadDataFromFile() []int {
+	filePath := "state/data.json"
+
+	// Scarica da S3 se abilitato
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		cmd := exec.Command("aws", "s3", "cp", fmt.Sprintf("s3://%s/state/data.json", bucket), filePath)
+		if output, err := cmd.CombinedOutput(); err != nil {
+			log.Printf("[RECOVERY] Warning: errore download data.json da S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Println("[RECOVERY] data.json scaricato da S3")
+		}
+	}
+
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		log.Println("[RECOVERY] data.json non esistente. Ritorno vuoto.")
+		return []int{}
+	}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		log.Printf("Errore apertura %s: %v", filePath, err)
+		return []int{}
+	}
+	defer file.Close()
+
+	var data []int
+	decoder := json.NewDecoder(file)
+	err = decoder.Decode(&data)
+	if err != nil {
+		log.Printf("Errore decoding JSON %s: %v", filePath, err)
+		return []int{}
+	}
+	return data
+}
+
+func StateFilesExist() bool {
+	_, err := os.Stat("state/status.json")
+	return err == nil
+}

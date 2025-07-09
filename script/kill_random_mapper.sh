@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🛠️ [FAULT INJECTION] Cerco un mapper da uccidere..."
+echo "[FAULT INJECTION] Cerco un mapper da uccidere..."
 sleep 2
 
 # Trova un container mapper a caso

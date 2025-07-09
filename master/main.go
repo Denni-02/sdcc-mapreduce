@@ -61,6 +61,24 @@ func main() {
 		return
 	}
 
+	if utils.StateFilesExist() {
+		log.Println("[STATE] status.json esiste. Provo a recuperare i chunk pending...")
+
+		data := utils.LoadDataFromFile()
+		chunks := utils.RecoverPendingChunks()
+
+		if len(chunks) > 0 {
+			log.Printf("[RECOVERY] Avvio fase MAP con %d chunk pending\n", len(chunks))
+			reducerRanges := master.MapReducersToRanges(data)
+			master.ExecuteMapPhase(chunks, reducerRanges)
+			master.CombineOutputFiles()
+			utils.ResetState()
+			return
+		}
+
+		log.Println("[RECOVERY] Nessun chunk pending trovato. Passo a generazione nuova.")
+	}
+
 	// Genera i dati casuali
 	data := master.GenerateData(config.Settings.Count, config.Settings.Xi, config.Settings.Xf)
 	log.Printf("\n\nNumeri generati: %v\n\n", data)
