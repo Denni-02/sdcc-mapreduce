@@ -1,69 +1,105 @@
-[MASTER] 2025/07/09 14:07:19 Attendo la registrazione di 3 mapper e 3 reducer...
-[MASTER] 2025/07/09 14:07:19 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:19 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/09 14:07:20 Registrato nuovo worker: 6e3b62d19b5b:9001 (mapper)
-[MASTER] 2025/07/09 14:07:20 Registrato nuovo worker: 2da1c960bbaa:9001 (reducer)
-[MASTER] 2025/07/09 14:07:20 Registrato nuovo worker: e2b9a7dcf7a6:9001 (mapper)
-[MASTER] 2025/07/09 14:07:20 Registrati finora: 2 mapper, 1 reducer
-[MASTER] 2025/07/09 14:07:20 Registrato nuovo worker: fb577ae09a02:9001 (reducer)
-[MASTER] 2025/07/09 14:07:21 Registrato nuovo worker: 79881e06ebfe:9001 (mapper)
-[MASTER] 2025/07/09 14:07:21 Registrato nuovo worker: d775e3f8b5d1:9001 (reducer)
-[MASTER] 2025/07/09 14:07:21 Registrati finora: 3 mapper, 3 reducer
-[MASTER] 2025/07/09 14:07:21 Tutti i worker sono registrati, si può partire.
-[MASTER] 2025/07/09 14:07:23 Errore download status.json da S3: exit status 1
-Output: fatal error: An error occurred (404) when calling the HeadObject operation: Key "state/status.json" does not exist
-[MASTER] 2025/07/09 14:07:23 [STATE] Nessun file di stato trovato: skip PhaseAlreadyDone.
-[MASTER] 2025/07/09 14:07:23 
-
-Numeri generati: [48 40 35 15 24 46 2 35 28 50 23 21 10 16 1 48 24 16 34 50 28 29 15 10 40 10 24 3 14 23 49 32 1 9 42 48 15 32 24 4 28 13 31 27 7 10 14 20 36 10 39 24 31 46 32 40 46 46 16 39 26 43 11 22 36 13 21 50 13 25 3 28 24 45 9 15 40 27 28 16 46 42 42 14 32 35 26 45 37 4 30 12 16 5 37 5 6 4 9 15]
-
-[MASTER] 2025/07/09 14:07:23 [STATE] Dati salvati in state/data.json
-[MASTER] 2025/07/09 14:07:24 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/data.json
-[MASTER] 2025/07/09 14:07:24 Chunk distribuiti ai mapper: [[48 40 35 15 24 46 2 35 28 50 23 21 10 16 1 48 24 16 34 50 28 29 15 10 40 10 24 3 14 23 49 32 1 9] [42 48 15 32 24 4 28 13 31 27 7 10 14 20 36 10 39 24 31 46 32 40 46 46 16 39 26 43 11 22 36 13 21 50] [13 25 3 28 24 45 9 15 40 27 28 16 46 42 42 14 32 35 26 45 37 4 30 12 16 5 37 5 6 4 9 15]]
-
-[MASTER] 2025/07/09 14:07:24 [STATE] Chunk salvati in state/chunks.json
-[MASTER] 2025/07/09 14:07:25 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/chunks.json
-[MASTER] 2025/07/09 14:07:25 [STATE] Stato inizializzato in state/status.json
-[MASTER] 2025/07/09 14:07:26 Upload su S3 riuscito: s3://sdcc-mapreduce-recovery/state/status.json
-[MASTER] 2025/07/09 14:07:26 sample = [10 4 13 22 13 16 3 42 39 39]
-[MASTER] 2025/07/09 14:07:26 sample ordinato= [3 4 10 13 13 16 22 39 39 42]
-[MASTER] 2025/07/09 14:07:26 ranges= [13 22]
-[MASTER] 2025/07/09 14:07:26 ranges = [13 22]
-[MASTER] 2025/07/09 14:07:26 Reducer 2da1c960bbaa:9001 gestisce l'intervallo [1, 13]
-[MASTER] 2025/07/09 14:07:26 Reducer fb577ae09a02:9001 gestisce l'intervallo [13, 22]
-[MASTER] 2025/07/09 14:07:26 Reducer d775e3f8b5d1:9001 gestisce l'intervallo [22, 51]
-[MASTER] 2025/07/09 14:07:26 Reducer effettivamente utilizzati: 3
-[MASTER] 2025/07/09 14:07:36 Attendo la registrazione di 3 mapper e 3 reducer...
-[MASTER] 2025/07/09 14:07:36 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:36 Master RPC server in ascolto su :9000 per registrazioni
-[MASTER] 2025/07/09 14:07:37 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:38 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:39 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:40 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:41 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:42 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:43 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:44 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:45 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:46 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:47 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:48 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:49 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:50 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:51 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:52 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:53 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:54 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:55 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:56 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:57 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:58 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:07:59 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:08:00 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:08:01 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:08:02 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:08:03 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:08:04 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:08:05 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:08:06 Registrati finora: 0 mapper, 0 reducer
-[MASTER] 2025/07/09 14:08:06 Timeout: non tutti i worker si sono registrati in 30 secondi
+[MASTER] 2025/07/10 08:14:47 Errore download completed.json da S3: exit status 1
+Output: fatal error: An error occurred (400) when calling the HeadObject operation: Bad Request
+[MASTER] 2025/07/10 08:14:47 [STATE] Scaricato completed.json da S3
+[MASTER] 2025/07/10 08:14:47 File output/final_output.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_00103735be88.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_0214c030d5c0.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_050a213c3592.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_0b100c413c65.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_0b72c9ccb341_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_118ff2c11ba1_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_215d707d451b_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_2b98f4740fe5_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_355f561d1832_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_3e065ecb22fc.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_4492c22b394f.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_4b8ec004787e_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_5e010cad9635_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_62b329d550b8.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_64cebdefac69_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_68b71029ca54.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_73b8b149a9f0.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_79d97f2791de_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_8a7b94bada47.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_8bc6f79d154a_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_9e651582b2b9_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_a84c96279a8c.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_af8b65e376d6_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_b2e4f1964a40_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_ba8abc502c8d_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_c86f233609ff.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_d17d2df8d080.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_ddec8e723505_9001.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_e89907b313d1.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 File temporaneo output/temp_fb951966df0e.txt rimosso.
+[MASTER] 2025/07/10 08:14:47 [STATE] completed.json rimosso
+[MASTER] 2025/07/10 08:14:48 Errore rimozione completed.json da S3: exit status 1
+Output: delete failed: s3://sdcc-mapreduce-recovery/state/completed.json An error occurred (ExpiredToken) when calling the DeleteObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:14:48 Master RPC server in ascolto su :9000 per registrazioni
+[MASTER] 2025/07/10 08:14:48 Registrato nuovo worker: c4a522877858:9001 (reducer)
+[MASTER] 2025/07/10 08:14:48 Registrato nuovo worker: e0820b07dde4:9001 (mapper)
+[MASTER] 2025/07/10 08:14:49 Registrato nuovo worker: 204ed2b33678:9001 (reducer)
+[MASTER] 2025/07/10 08:14:49 Registrato nuovo worker: dcbbfd7c7b76:9001 (mapper)
+[MASTER] 2025/07/10 08:14:49 Registrato nuovo worker: 187908aa98ff:9001 (reducer)
+[MASTER] 2025/07/10 08:14:49 Registrato nuovo worker: 1bab064958c5:9001 (mapper)
+[MASTER] 2025/07/10 08:14:50 Errore download status.json da S3: exit status 1
+Output: fatal error: An error occurred (400) when calling the HeadObject operation: Bad Request
+[MASTER] 2025/07/10 08:14:50 [STATE] Nessun file di stato trovato: skip PhaseAlreadyDone.
+[MASTER] 2025/07/10 08:14:50 Attendo la registrazione di 3 mapper e 3 reducer...
+[MASTER] 2025/07/10 08:14:50 Registrati finora: 3 mapper, 3 reducer
+[MASTER] 2025/07/10 08:14:50 Tutti i worker sono registrati, si può partire.
+[MASTER] 2025/07/10 08:14:50 [STATE] workers.json salvato correttamente.
+[MASTER] 2025/07/10 08:14:51 Errore upload workers.json su S3: exit status 1
+Output: upload failed: state/workers.json to s3://sdcc-mapreduce-recovery/state/workers.json An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:14:51 [STATE] Dati salvati in state/data.json
+[MASTER] 2025/07/10 08:14:51 Errore upload su S3 (s3://sdcc-mapreduce-recovery/state/data.json): exit status 1
+Output: upload failed: state/data.json to s3://sdcc-mapreduce-recovery/state/data.json An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:14:51 [STATE] Chunk salvati in state/chunks.json
+[MASTER] 2025/07/10 08:14:52 Errore upload su S3 (s3://sdcc-mapreduce-recovery/state/chunks.json): exit status 1
+Output: upload failed: state/chunks.json to s3://sdcc-mapreduce-recovery/state/chunks.json An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:14:52 [STATE] Stato inizializzato in state/status.json
+[MASTER] 2025/07/10 08:14:52 Errore upload status.json su S3: exit status 1
+Output: upload failed: state/status.json to s3://sdcc-mapreduce-recovery/state/status.json An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:14:52 sample = [29 39 36 44 1 3 21 22 10 19]
+[MASTER] 2025/07/10 08:14:52 sample ordinato= [1 3 10 19 21 22 29 36 39 44]
+[MASTER] 2025/07/10 08:14:52 ranges= [19 29]
+[MASTER] 2025/07/10 08:14:52 ranges = [19 29]
+[MASTER] 2025/07/10 08:14:52 Reducer c4a522877858:9001 gestisce l'intervallo [1, 19]
+[MASTER] 2025/07/10 08:14:52 Reducer 204ed2b33678:9001 gestisce l'intervallo [19, 29]
+[MASTER] 2025/07/10 08:14:52 Reducer 187908aa98ff:9001 gestisce l'intervallo [29, 51]
+[MASTER] 2025/07/10 08:14:52 Reducer effettivamente utilizzati: 3
+2025/07/10 08:14:57 [MAP-02] Completato con successo da e0820b07dde4:9001
+[MASTER] 2025/07/10 08:14:57 MAP-02 completato
+[MASTER] 2025/07/10 08:14:57 [STATE] Stato aggiornato: chunk 2 → done
+2025/07/10 08:14:57 [MAP-01] Completato con successo da 1bab064958c5:9001
+[MASTER] 2025/07/10 08:14:57 MAP-01 completato
+2025/07/10 08:14:57 [MAP-00] Completato con successo da dcbbfd7c7b76:9001
+[MASTER] 2025/07/10 08:14:57 MAP-00 completato
+[MASTER] 2025/07/10 08:14:58 Errore upload status.json su S3: exit status 1
+Output: upload failed: state/status.json to s3://sdcc-mapreduce-recovery/state/status.json An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:14:58 [STATE] Stato aggiornato: chunk 1 → done
+[MASTER] 2025/07/10 08:14:59 Errore upload status.json su S3: exit status 1
+Output: upload failed: state/status.json to s3://sdcc-mapreduce-recovery/state/status.json An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:14:59 [STATE] Stato aggiornato: chunk 0 → done
+[MASTER] 2025/07/10 08:14:59 Errore upload status.json su S3: exit status 1
+Output: upload failed: state/status.json to s3://sdcc-mapreduce-recovery/state/status.json An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:14:59 Fase di Map completata.
+[MASTER] 2025/07/10 08:14:59 Unisco il file temporaneo: output/temp_c4a522877858_9001.txt
+[MASTER] 2025/07/10 08:14:59 Unisco il file temporaneo: output/temp_204ed2b33678_9001.txt
+[MASTER] 2025/07/10 08:14:59 Unisco il file temporaneo: output/temp_187908aa98ff_9001.txt
+[MASTER] 2025/07/10 08:14:59 Output finale scritto in: output/final_output.txt
+[MASTER] 2025/07/10 08:14:59 [STATE] Flag completamento salvato.
+[MASTER] 2025/07/10 08:15:00 Errore upload completed.json su S3: exit status 1
+Output: upload failed: state/completed.json to s3://sdcc-mapreduce-recovery/state/completed.json An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:15:00 [STATE] File state/status.json rimosso
+[MASTER] 2025/07/10 08:15:00 [STATE] File state/data.json rimosso
+[MASTER] 2025/07/10 08:15:00 [STATE] File state/chunks.json rimosso
+[MASTER] 2025/07/10 08:15:00 [STATE] File state/workers.json rimosso
+[MASTER] 2025/07/10 08:15:01 Errore rimozione s3://sdcc-mapreduce-recovery/state/status.json da S3: exit status 1
+Output: delete failed: s3://sdcc-mapreduce-recovery/state/status.json An error occurred (ExpiredToken) when calling the DeleteObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:15:01 Errore rimozione s3://sdcc-mapreduce-recovery/state/data.json da S3: exit status 1
+Output: delete failed: s3://sdcc-mapreduce-recovery/state/data.json An error occurred (ExpiredToken) when calling the DeleteObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:15:02 Errore rimozione s3://sdcc-mapreduce-recovery/state/chunks.json da S3: exit status 1
+Output: delete failed: s3://sdcc-mapreduce-recovery/state/chunks.json An error occurred (ExpiredToken) when calling the DeleteObject operation: The provided token has expired.
+[MASTER] 2025/07/10 08:15:03 Errore rimozione s3://sdcc-mapreduce-recovery/state/workers.json da S3: exit status 1
+Output: delete failed: s3://sdcc-mapreduce-recovery/state/workers.json An error occurred (ExpiredToken) when calling the DeleteObject operation: The provided token has expired.

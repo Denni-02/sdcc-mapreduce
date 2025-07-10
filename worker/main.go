@@ -8,6 +8,7 @@ import (
 	"net/rpc"
 	"os"
 	"sdcc-mapreduce/utils"
+	"time"
 )
 
 func main() {
@@ -64,27 +65,29 @@ func main() {
 	server.Accept(listener)
 }
 
+// Registrazione al Master via RPC
 func registerSelf(address, role, masterAddr string) {
-	client, err := rpc.Dial("tcp", masterAddr)
-	if err != nil {
-		log.Fatalf("Errore connessione RPC al master (%s): %v", masterAddr, err)
-	}
-	defer client.Close()
+	for {
+		client, err := rpc.Dial("tcp", masterAddr)
+		if err != nil {
+			log.Printf("Master non raggiungibile (%s), retry tra 3s...", masterAddr)
+			time.Sleep(3 * time.Second)
+			continue
+		}
 
-	req := utils.WorkerConfig{
-		Role:    role,
-		Address: address,
-	}
-	var reply bool
+		defer client.Close()
 
-	err = client.Call("Master.Register", req, &reply)
-	if err != nil {
-		log.Fatalf("Errore RPC Register: %v", err)
-	}
-	if reply {
+		req := utils.WorkerConfig{Role: role, Address: address}
+		var reply bool
+		err = client.Call("Master.Register", req, &reply)
+		if err != nil {
+			log.Printf("Errore RPC Register: %v, retry tra 3s...", err)
+			time.Sleep(3 * time.Second)
+			continue
+		}
+
 		log.Printf("Registrazione avvenuta con successo (%s - %s)", role, address)
-	} else {
-		log.Printf("Worker già registrato (%s)", address)
+		break
 	}
 }
 

@@ -51,7 +51,7 @@ Altrimenti:
 git clone https://github.com/Denni-02/sdcc-mapreduce.git
 ```
 
-### 4. Imppstare credenziali AWS
+### 4. Impostare credenziali AWS
 
 Esegui lo script helper che crea lo scheletro del file .env:
 

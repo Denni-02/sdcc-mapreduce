@@ -1,19 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net"
 	"net/rpc"
-	"time"
+	//"time"
 	"sdcc-mapreduce/utils"
 )
 
 // Coordina l'intero flusso MapReduce: generazione dati, assegnazione task, raccolta risultati.
 func main() {
 
-	// Pulizia dei file di output precedenti
-	utils.CleanupOutputFiles()
+	/* -------------------------------------------------------------
+		(0) INIZIALIZZAZIONE
+	-------------------------------------------------------------- */ 
 
 	// Logger master
 	logger, file, err := utils.SetupLogger("/app/log/log_master/master.log", "[MASTER] ")
@@ -24,6 +24,12 @@ func main() {
 	log.SetOutput(file)
 	log.SetFlags(logger.Flags())
 	log.SetPrefix(logger.Prefix())
+
+	// Pulizia dei file di output precedenti
+	if utils.CompletionFlagExists() {
+		utils.CleanupOutputFiles()
+		utils.RemoveCompletionFlag()
+	}
 
 	// Carica la configurazione dal file config.json
 	config := utils.LoadConfig("config/config.json")
@@ -41,6 +47,9 @@ func main() {
 		log.Fatalf("Errore nella registrazione RPC del master: %v", err)
 	}
 
+	//fmt.Println("[TEST1] Pausa per kill del master prima della registrazione")
+	//time.Sleep(15 * time.Second)
+
 	// Listener per accettare le connessioni dei worker
 	go func() {
 		listener, err := net.Listen("tcp", ":9000")
@@ -51,8 +60,19 @@ func main() {
 		rpcServer.Accept(listener)
 	}()
 
-	// Aspetta che tutti i worker si registrino
-	master.WaitForWorkers(config.Settings.NumMappers, config.Settings.NumReducers)
+	/* -------------------------------------------------------------
+		(1) CRASH PRIMA/DOPO REGISTRAZIONE WORKER
+	-------------------------------------------------------------- */
+
+	// Recupera worker da file se esiste
+	if utils.WorkersFileExists() {
+		log.Println("[RECOVERY] Trovato workers.json → recupero worker registrati")
+		master.Workers = utils.RecoverWorkersFromFile()
+	}
+
+	/* -------------------------------------------------------------
+		(2) FASE MAP GIA' COMPLETATA
+	-------------------------------------------------------------- */
 
 	if utils.PhaseAlreadyDone() {
 		log.Println("MAP già completata. Passo al Combine.")
@@ -61,6 +81,9 @@ func main() {
 		return
 	}
 
+	/* -------------------------------------------------------------
+		(3) CRASH CON FASE MAP INIZIATA E CHUNK PENDENTI
+	-------------------------------------------------------------- */
 	if utils.StateFilesExist() {
 		log.Println("[STATE] status.json esiste. Provo a recuperare i chunk pending...")
 
@@ -72,6 +95,7 @@ func main() {
 			reducerRanges := master.MapReducersToRanges(data)
 			master.ExecuteMapPhase(chunks, reducerRanges)
 			master.CombineOutputFiles()
+			utils.SaveCompletionFlag()
 			utils.ResetState()
 			return
 		}
@@ -79,27 +103,72 @@ func main() {
 		log.Println("[RECOVERY] Nessun chunk pending trovato. Passo a generazione nuova.")
 	}
 
-	// Genera i dati casuali
+	/* -------------------------------------------------------------
+		(4) CRASH DOPO GENERAZIONE DATI
+	-------------------------------------------------------------- */
+
+	if utils.DataFileExists() {
+		log.Println("[RECOVERY] Trovato solo data.json. Rilancio split.")
+		data := utils.LoadDataFromFile()
+		chunks := master.SplitData(data)
+		utils.SaveChunksToFile(chunks)
+		utils.InitStatusFile(len(chunks))
+		reducerRanges := master.MapReducersToRanges(data)
+		master.ExecuteMapPhase(chunks, reducerRanges)
+		master.CombineOutputFiles()
+		utils.SaveCompletionFlag()
+		utils.ResetState()
+		return
+	}
+
+	/* -------------------------------------------------------------
+		(5) CRASH DOPO GENERAZIONE CHUNK
+	-------------------------------------------------------------- */
+	if utils.ChunkFileExists() {
+		log.Println("[RECOVERY] Trovato solo chunk.json.")
+		data := utils.LoadDataFromFile()
+		chunks := utils.LoadChunksFromFile()
+		utils.SaveChunksToFile(chunks)
+		utils.InitStatusFile(len(chunks))
+		reducerRanges := master.MapReducersToRanges(data)
+		master.ExecuteMapPhase(chunks, reducerRanges)
+		master.CombineOutputFiles()
+		utils.SaveCompletionFlag()
+		utils.ResetState()
+		return
+	}
+
+	/* -------------------------------------------------------------
+		(6) GENERAZIONE DA ZERO
+	-------------------------------------------------------------- */
+
+	master.WaitForWorkers(config.Settings.NumMappers, config.Settings.NumReducers)
+	utils.SaveWorkerOnRegister(master.Workers)
+
+	//fmt.Println("[TEST2] Pausa per kill del master dopo la registrazione ma prima della generazione dei dati")
+	//time.Sleep(15 * time.Second)
+
 	data := master.GenerateData(config.Settings.Count, config.Settings.Xi, config.Settings.Xf)
-	log.Printf("\n\nNumeri generati: %v\n\n", data)
 	utils.SaveDataToFile(data)
 
-	// Suddivide i dati in chunk
+	//fmt.Println("[TEST3] Pausa per kill del master dopo generazione dati ma prima dello split in chunk")
+	//time.Sleep(15 * time.Second)
+
 	chunks := master.SplitData(data)
-	log.Printf("Chunk distribuiti ai mapper: %v\n\n", chunks)
 	utils.SaveChunksToFile(chunks)
 	utils.InitStatusFile(len(chunks))
 
-	// Mappa i reducer agli intervalli di competenza
 	reducerRanges := master.MapReducersToRanges(data)
 
-	fmt.Println("Tutti i worker registrati. Attendo 15 secondi prima della fase MAP per permettere fault injection...")
-	time.Sleep(15 * time.Second)
+	//fmt.Println("[TEST4] Pausa per kill del master prima di ExecuteMapPhase")
+	//time.Sleep(15 * time.Second)
 
-	// Fase di Map
 	master.ExecuteMapPhase(chunks, reducerRanges)
 
-	// Combina i risultati finali
+	//fmt.Println("[TEST5] Pausa per kill del master dopo di ExecuteMapPhase")
+	//time.Sleep(15 * time.Second)
+
 	master.CombineOutputFiles()
+	utils.SaveCompletionFlag()
 	utils.ResetState()
 }

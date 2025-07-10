@@ -12,7 +12,116 @@ import (
 
 var statusMu sync.Mutex
 
-// SaveDataToFile salva i numeri generati in ./state/data.json e li carica su S3 se abilitato
+/* -------------------------------------------------------------
+		ALTRO
+-------------------------------------------------------------- */
+
+// Salva un flag JSON che indica il completamento con successo dell’esecuzione
+func SaveCompletionFlag() {
+	os.MkdirAll("state", os.ModePerm)
+	filePath := "state/completed.json"
+
+	err := os.WriteFile(filePath, []byte(`{"completed": true}`), 0644)
+	if err != nil {
+		log.Printf("Errore salvataggio completed.json: %v", err)
+	} else {
+		log.Println("[STATE] Flag completamento salvato.")
+	}
+
+	// Upload su S3 se abilitato
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		s3Path := fmt.Sprintf("s3://%s/state/completed.json", bucket)
+		cmd := exec.Command("aws", "s3", "cp", filePath, s3Path)
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Printf("Errore upload completed.json su S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Printf("Upload completed.json su S3 riuscito: %s", s3Path)
+		}
+	}
+}
+
+// Controlla se esiste il file di completamento
+func CompletionFlagExists() bool {
+	filePath := "state/completed.json"
+
+	// Scarica da S3 se attivo
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		s3Path := fmt.Sprintf("s3://%s/state/completed.json", bucket)
+		cmd := exec.Command("aws", "s3", "cp", s3Path, filePath)
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Printf("Errore download completed.json da S3: %v\nOutput: %s", err, string(output))
+		}
+		log.Println("[STATE] Scaricato completed.json da S3")
+	}
+
+	_, err := os.Stat(filePath)
+	return err == nil
+}
+
+// Elimina il file di completamento
+func RemoveCompletionFlag() {
+	filePath := "state/completed.json"
+
+	// Rimozione locale
+	if err := os.Remove(filePath); err == nil {
+		log.Println("[STATE] completed.json rimosso")
+	} else if !os.IsNotExist(err) {
+		log.Printf("Errore rimozione completed.json: %v", err)
+	}
+
+	// Rimozione da S3
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		s3Path := fmt.Sprintf("s3://%s/state/completed.json", bucket)
+		cmd := exec.Command("aws", "s3", "rm", s3Path)
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Printf("Errore rimozione completed.json da S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Printf("completed.json rimosso da S3: %s", s3Path)
+		}
+	}
+}
+
+// Elimina tutti i file di stato
+func ResetState() {
+	// Elenco dei file locali da rimuovere
+	files := []string{
+		"state/status.json",
+		"state/data.json",
+		"state/chunks.json",
+		"state/workers.json", 
+	}
+
+	for _, filePath := range files {
+		if err := os.Remove(filePath); err == nil {
+			log.Printf("[STATE] File %s rimosso", filePath)
+		} else if !os.IsNotExist(err) {
+			log.Printf("Errore durante la rimozione di %s: %v", filePath, err)
+		}
+	}
+
+	// Rimuovi da S3 se attivo
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		for _, name := range []string{"status.json", "data.json", "chunks.json", "workers.json"} {
+			s3Path := fmt.Sprintf("s3://%s/state/%s", bucket, name)
+			cmd := exec.Command("aws", "s3", "rm", s3Path)
+			output, err := cmd.CombinedOutput()
+			if err != nil {
+				log.Printf("Errore rimozione %s da S3: %v\nOutput: %s", s3Path, err, string(output))
+			} else {
+				log.Printf("File rimosso da S3: %s", s3Path)
+			}
+		}
+	}
+}
+
+// Salva i numeri generati in ./state/data.json e li carica su S3 se abilitato
 func SaveDataToFile(data []int) {
 	err := os.MkdirAll("state", os.ModePerm)
 	if err != nil {
@@ -48,8 +157,7 @@ func SaveDataToFile(data []int) {
 	}
 }
 
-
-// SaveChunksToFile salva i chunk generati in ./state/chunks.json e li carica su S3 se abilitato
+// Salva i chunk generati in ./state/chunks.json e li carica su S3 se abilitato
 func SaveChunksToFile(chunks [][]int) {
 	err := os.MkdirAll("state", os.ModePerm)
 	if err != nil {
@@ -84,6 +192,7 @@ func SaveChunksToFile(chunks [][]int) {
 	}
 }
 
+// Inizializza il file status.json con lo stato "pending" per ogni chunk
 func InitStatusFile(nChunks int) {
 	err := os.MkdirAll("state", os.ModePerm)
 	if err != nil {
@@ -123,6 +232,7 @@ func InitStatusFile(nChunks int) {
 	}
 }
 
+// Aggiorna lo stato del chunk i-esimo a "done" in status.json
 func SaveStatusAfterChunk(i int) {
 
 	statusMu.Lock()
@@ -177,6 +287,83 @@ func SaveStatusAfterChunk(i int) {
 	}
 }
 
+// Controlla la presenza del file status.json
+func StateFilesExist() bool {
+	_, err := os.Stat("state/status.json")
+	return err == nil
+}
+
+/* -------------------------------------------------------------
+		(1) CRASH PRIMA/DOPO REGISTRAZIONE WORKER
+	-------------------------------------------------------------- */
+
+// Verifica se esiste workers.json
+func WorkersFileExists() bool {
+	_, err := os.Stat("state/workers.json")
+	return err == nil
+}
+
+// Legge i worker salvati in workers.json e li restituisce
+func RecoverWorkersFromFile() []WorkerConfig {
+	file, err := os.Open("state/workers.json")
+	if err != nil {
+		log.Printf("Errore apertura workers.json: %v", err)
+		return nil
+	}
+	defer file.Close()
+
+	var workers []WorkerConfig
+	err = json.NewDecoder(file).Decode(&workers)
+	if err != nil {
+		log.Printf("Errore decoding workers.json: %v", err)
+		return nil
+	}
+	return workers
+}
+
+// Salva i worker registrati in workers.json
+func SaveWorkerOnRegister(workers []WorkerConfig) {
+	err := os.MkdirAll("state", os.ModePerm)
+	if err != nil {
+		log.Printf("Errore creazione cartella state/: %v", err)
+		return
+	}
+
+	filePath := "state/workers.json"
+	file, err := os.Create(filePath)
+	if err != nil {
+		log.Printf("Errore creazione workers.json: %v", err)
+		return
+	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	if err := encoder.Encode(workers); err != nil {
+		log.Printf("Errore encoding workers.json: %v", err)
+		return
+	}
+
+	log.Println("[STATE] workers.json salvato correttamente.")
+
+	// Upload S3 se abilitato
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		s3Path := fmt.Sprintf("s3://%s/state/workers.json", bucket)
+		cmd := exec.Command("aws", "s3", "cp", filePath, s3Path)
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Printf("Errore upload workers.json su S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Printf("Upload workers.json su S3 riuscito: %s", s3Path)
+		}
+	}
+}
+
+/* -------------------------------------------------------------
+		(2) FASE MAP GIA' COMPLETATA
+-------------------------------------------------------------- */
+
+// Controlla se tutti i chunk nel file status.json sono "done"
 func PhaseAlreadyDone() bool {
 	filePath := "state/status.json"
 
@@ -224,30 +411,11 @@ func PhaseAlreadyDone() bool {
 	return true
 }
 
-func ResetState() {
-	filePath := "state/status.json"
+/* -------------------------------------------------------------
+		(3) FASE MAP INIZIATA E CHUNK PENDENTI
+-------------------------------------------------------------- */
 
-	// Rimuovi file locale
-	if err := os.Remove(filePath); err == nil {
-		log.Printf("[STATE] File %s rimosso", filePath)
-	} else if !os.IsNotExist(err) {
-		log.Printf("Errore durante la rimozione di %s: %v", filePath, err)
-	}
-
-	// Se S3 attivo, rimuovi anche da S3
-	if os.Getenv("ENABLE_S3") == "true" {
-		bucket := os.Getenv("S3_BUCKET")
-		s3Path := fmt.Sprintf("s3://%s/state/status.json", bucket)
-		cmd := exec.Command("aws", "s3", "rm", s3Path)
-		output, err := cmd.CombinedOutput()
-		if err != nil {
-			log.Printf("Errore rimozione %s da S3: %v\nOutput: %s", s3Path, err, string(output))
-		} else {
-			log.Printf("File rimosso da S3: %s", s3Path)
-		}
-	}
-}
-
+// Restituisce tutti i chunk marcati come "pending" nel file status.json
 func RecoverPendingChunks() [][]int {
 	statusMu.Lock()
 	defer statusMu.Unlock()
@@ -327,6 +495,17 @@ func RecoverPendingChunks() [][]int {
 	return pending
 }
 
+/* -------------------------------------------------------------
+		(4) CRASH DOPO GENERAZIONE DATI
+-------------------------------------------------------------- */
+
+// Controlla se il file data.json esiste
+func DataFileExists() bool {
+	_, err := os.Stat("state/data.json")
+	return err == nil
+}
+
+// Carica i dati da data.json
 func LoadDataFromFile() []int {
 	filePath := "state/data.json"
 
@@ -363,7 +542,44 @@ func LoadDataFromFile() []int {
 	return data
 }
 
-func StateFilesExist() bool {
-	_, err := os.Stat("state/status.json")
+/* -------------------------------------------------------------
+		(5) CRASH DOPO GENERAZIONE CHUNK
+-------------------------------------------------------------- */
+
+// Controlla la presenza di chunks.json
+func ChunkFileExists() bool {
+	_, err := os.Stat("state/chunks.json")
 	return err == nil
 }
+
+// Carica i chunk da chunks.json
+func LoadChunksFromFile() [][]int {
+	filePath := "state/chunks.json"
+
+	// Scarica da S3 se abilitato
+	if os.Getenv("ENABLE_S3") == "true" {
+		bucket := os.Getenv("S3_BUCKET")
+		cmd := exec.Command("aws", "s3", "cp", fmt.Sprintf("s3://%s/state/chunks.json", bucket), filePath)
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Printf("[RECOVERY] Warning: errore download chunks.json da S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Println("[RECOVERY] chunks.json scaricato da S3")
+		}
+	}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		log.Printf("Errore apertura %s: %v", filePath, err)
+		return [][]int{}
+	}
+	defer file.Close()
+
+	var chunks [][]int
+	if err := json.NewDecoder(file).Decode(&chunks); err != nil {
+		log.Printf("Errore decoding chunks.json: %v", err)
+		return [][]int{}
+	}
+	return chunks
+}
+
