@@ -51,6 +51,20 @@ services:
     networks:
       - mapreduce-net
 
+  standby:
+    build:
+      context: .
+      dockerfile: standby/Dockerfile
+    container_name: standby_master
+    depends_on:
+      - master
+    volumes:
+      - ./state:/app/state
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - mapreduce-net
+
+
 networks:
   mapreduce-net:
     driver: bridge

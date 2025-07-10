@@ -40,6 +40,7 @@ func SaveCompletionFlag() {
 			log.Printf("Upload completed.json su S3 riuscito: %s", s3Path)
 		}
 	}
+
 }
 
 // Controlla se esiste il file di completamento
