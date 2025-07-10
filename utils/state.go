@@ -58,6 +58,7 @@ func CompletionFlagExists() bool {
 		log.Println("[STATE] Scaricato completed.json da S3")
 	}
 
+	// Controlla comunque in locale
 	_, err := os.Stat(filePath)
 	return err == nil
 }
