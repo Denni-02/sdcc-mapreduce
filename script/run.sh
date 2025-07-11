@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo chown -R $USER:$USER ./log
+sudo chmod -R u+w ./log
+
 set -a
 source .env
 set +a
@@ -27,5 +30,3 @@ docker-compose build
 
 echo "Avvio con $NUM_MAPPERS mapper e $NUM_REDUCERS reducer..."
 docker-compose up --scale mapper=$NUM_MAPPERS --scale reducer=$NUM_REDUCERS
-
-

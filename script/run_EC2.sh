@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo chown -R $USER:$USER ./log
+sudo chmod -R u+w ./log
+
 set -a
 source .env
 set +a
