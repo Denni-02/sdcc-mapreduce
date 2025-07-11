@@ -13,8 +13,8 @@ echo "Pulizia container, immagini e volumi..."
 docker system prune -a --volumes -f
 
 echo "Pulizia log..."
-rm -f ./log/log_master/*.log
-rm -f ./log/log_worker/*.log
+find ./log/log_master -type f -name "*.log" -exec sudo rm -f {} +
+find ./log/log_worker -type f -name "*.log" -exec sudo rm -f {} +
 
 echo "Aggiornamento config.json con $NUM_MAPPERS mapper e $NUM_REDUCERS reducer..."
 jq ".settings.numMappers = $NUM_MAPPERS | .settings.numReducers = $NUM_REDUCERS" \

@@ -15,7 +15,7 @@ func SetupLogger(filepath string, prefix string) (*log.Logger, *os.File, error) 
 		return nil, nil, err
 	}
 
-	file, err := os.OpenFile(filepath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile(filepath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		return nil, nil, err
 	}

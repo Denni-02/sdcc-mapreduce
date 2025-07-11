@@ -4,8 +4,8 @@ import (
 	"log"
 	"net"
 	"net/rpc"
-	"time"
-	"fmt"
+	//"time"
+	//"fmt"
 	"sdcc-mapreduce/utils"
 )
 
@@ -48,8 +48,8 @@ func main() {
 		log.Fatalf("Errore nella registrazione RPC del master: %v", err)
 	}
 
-	fmt.Println("[TEST1] Pausa per kill del master prima della registrazione")
-	time.Sleep(15 * time.Second)
+	//fmt.Println("[TEST1] Pausa per kill del master prima della registrazione")
+	//time.Sleep(15 * time.Second)
 
 	// Listener per accettare le connessioni dei worker
 	go func() {

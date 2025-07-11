@@ -1,17 +1,15 @@
 FROM golang:1.23.3-alpine
 
 # Installa Docker CLI per usare `docker compose` nel container
-RUN apk add --no-cache docker-cli
+RUN apk add --no-cache docker-cli docker-compose
 
 WORKDIR /app
 
-# Copia l'intero progetto (serve per risolvere le importazioni locali come sdcc-mapreduce/utils)
+# Copia l'intero progetto
 COPY . .
 
-WORKDIR /app/standby
+# Costruzione del binario chiamato standby_bin
+RUN go build -o standby_bin ./standby/main.go
 
-# Costruzione del binario standby
-RUN go build -o standby main.go
-
-# Esegue il binario
-CMD ["./standby"]
+# Avvio del binario
+CMD ["./standby_bin"]

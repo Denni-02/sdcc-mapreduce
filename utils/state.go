@@ -21,12 +21,24 @@ func SaveCompletionFlag() {
 	os.MkdirAll("state", os.ModePerm)
 	filePath := "state/completed.json"
 
-	err := os.WriteFile(filePath, []byte(`{"completed": true}`), 0644)
+	// Usa Create + Write + Sync per garantire flush su disco
+	f, err := os.Create(filePath)
 	if err != nil {
-		log.Printf("Errore salvataggio completed.json: %v", err)
-	} else {
-		log.Println("[STATE] Flag completamento salvato.")
+		log.Printf("Errore creazione completed.json: %v", err)
+		return
 	}
+
+	_, err = f.Write([]byte(`{"completed": true}`))
+	if err != nil {
+		log.Printf("Errore scrittura completed.json: %v", err)
+	}
+
+	if err := f.Sync(); err != nil {
+		log.Printf("Errore sync completed.json: %v", err)
+	}
+
+	f.Close()
+	log.Println("[STATE] Flag completamento salvato e flushato su disco.")
 
 	// Upload su S3 se abilitato
 	if os.Getenv("ENABLE_S3") == "true" {
@@ -40,8 +52,8 @@ func SaveCompletionFlag() {
 			log.Printf("Upload completed.json su S3 riuscito: %s", s3Path)
 		}
 	}
-
 }
+
 
 // Controlla se esiste il file di completamento
 func CompletionFlagExists() bool {
@@ -55,14 +67,21 @@ func CompletionFlagExists() bool {
 		output, err := cmd.CombinedOutput()
 		if err != nil {
 			log.Printf("Errore download completed.json da S3: %v\nOutput: %s", err, string(output))
+		} else {
+			log.Println("[STATE] Scaricato completed.json da S3")
 		}
-		log.Println("[STATE] Scaricato completed.json da S3")
 	}
 
-	// Controlla comunque in locale
+	// Controlla in locale
 	_, err := os.Stat(filePath)
+	if err == nil {
+		log.Println("[STANDBY] completed.json rilevato correttamente")
+	} else {
+		log.Printf("[STANDBY] completed.json non trovato: %v", err)
+	}
 	return err == nil
 }
+
 
 // Elimina il file di completamento
 func RemoveCompletionFlag() {
@@ -121,6 +140,7 @@ func ResetState() {
 			}
 		}
 	}
+
 }
 
 // Salva i numeri generati in ./state/data.json e li carica su S3 se abilitato

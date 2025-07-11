@@ -13,8 +13,8 @@ echo "Pulizia container precedenti..."
 docker-compose down --volumes --remove-orphans
 
 echo "Pulizia log..."
-rm -f ./log/log_master/*.log
-rm -f ./log/log_worker/*.log
+find ./log/log_master -type f -name "*.log" -exec rm -f {} +
+find ./log/log_worker -type f -name "*.log" -exec rm -f {} +
 
 echo "Aggiornamento config.json con $NUM_MAPPERS mapper e $NUM_REDUCERS reducer..."
 
