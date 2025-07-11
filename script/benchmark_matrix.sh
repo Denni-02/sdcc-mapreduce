@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo chown -R $USER:$USER ../log ../output
+sudo chmod -R u+w ../log ../output
+
 # Combinazioni da testare
 MAPPERS_LIST=(2 4 8)
 REDUCERS_LIST=(2 4 8)
@@ -21,7 +24,7 @@ for M in "${MAPPERS_LIST[@]}"; do
       jq ".settings.count = $COUNT" "$CONFIG_PATH" > tmp.json && mv tmp.json "$CONFIG_PATH"
 
       # Pulizia output
-      rm -f ../output/*
+      sudo rm -f ../output/*
 
       # Tempo di inizio
       START=$(date +%s)
