@@ -4,9 +4,13 @@ Progetto per il corso **Sistemi Distribuiti e Cloud Computing (SDCC)**, a.a. 202
 
 Il progetto implementa un sistema distribuito di ordinamento basato sul paradigma **MapReduce**, scritto in **Go**, con comunicazione via **RPC**, organizzato in **master**, **mapper** e **reducer**, e con salvataggio dello stato mediante S3.
 
-Tutte le componenti sono containerizzate con **Docker** e orchestrate tramite **Docker Compose**.
+Tutte le componenti sono containerizzate con **Docker** e orchestrate tramite **Docker Compose**. Il sistema è eseguibile sia localmente, sia in cloud (EC2 AWS).
 
 ## Requisiti
+
+### Per l'esecuzione in locale:
+- Docker & Docker Compose installati
+- Go ≥ 1.20 (solo per modificare o ricompilare il codice)
 
 ### Per eseguire su EC2 (Learner Lab AWS):
 - Accesso a un **AWS Learner Lab**
@@ -14,9 +18,6 @@ Tutte le componenti sono containerizzate con **Docker** e orchestrate tramite **
 - Docker e Docker Compose preinstallati nel Lab
 - Una **chiave `.pem`** per la connessione SSH all’istanza
 
-### Per sviluppo locale:
-- Docker & Docker Compose installati
-- Go ≥ 1.20 (solo per modificare o ricompilare il codice)
 
 
 ## Come eseguire il progetto su un'istanza EC2
@@ -83,7 +84,7 @@ Imposta i parametri del sistema:
 Esegui il wrapper script run.sh con eventuali argomenti per specificare il numero di mapper e reducer:
 
 ```bash
-./script/run.sh numMappers numReducer
+./script/run_EC2.sh numMappers numReducer
 ```
 
 ### 7. Verifica output
