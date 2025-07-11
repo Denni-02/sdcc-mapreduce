@@ -21,17 +21,17 @@ func main() {
 			break
 		}
 
-		time.Sleep(5 * time.Second)
+		time.Sleep(7 * time.Second)
 
 		client, err := rpc.Dial("tcp", "master:9000")
 		if err != nil {
 			failCount++
 			log.Printf("[STANDBY] Tentativo fallito (%d/3)", failCount)
 
-			// Al primo tentativo fallito, aspetta 3s e ricontrolla se il master ha terminato bene
+			// Al primo tentativo fallito, aspetta 7s e ricontrolla se il master ha terminato bene
 			if failCount == 1 {
-				log.Println("[STANDBY] Attendo 3 secondi per verifica completamento...")
-				time.Sleep(5 * time.Second)
+				log.Println("[STANDBY] Attendo 7 secondi per verifica completamento...")
+				time.Sleep(7 * time.Second)
 				if utils.CompletionFlagExists() {
 					log.Println("[STANDBY] Computazione completata rilevata post-exit. Nessun recovery necessario.")
 					break

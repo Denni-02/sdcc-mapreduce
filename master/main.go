@@ -48,8 +48,8 @@ func main() {
 		log.Fatalf("Errore nella registrazione RPC del master: %v", err)
 	}
 
-	//fmt.Println("[TEST1] Pausa per kill del master prima della registrazione")
-	//time.Sleep(15 * time.Second)
+	fmt.Println("[TEST1] Pausa per kill del master prima della registrazione")
+	time.Sleep(15 * time.Second)
 
 	// Listener per accettare le connessioni dei worker
 	go func() {
@@ -152,8 +152,8 @@ func main() {
 	data := master.GenerateData(config.Settings.Count, config.Settings.Xi, config.Settings.Xf)
 	utils.SaveDataToFile(data)
 
-	fmt.Println("[TEST3] Pausa per kill del master dopo generazione dati ma prima dello split in chunk")
-	time.Sleep(15 * time.Second)
+	//fmt.Println("[TEST3] Pausa per kill del master dopo generazione dati ma prima dello split in chunk")
+	//time.Sleep(15 * time.Second)
 
 	chunks := master.SplitData(data)
 	utils.SaveChunksToFile(chunks)
