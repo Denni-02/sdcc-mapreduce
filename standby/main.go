@@ -15,7 +15,7 @@ func main() {
 	failCount := 0
 
 	for {
-		// ✅ Se completed.json esiste → arresta tutto
+		// Se completed.json esiste → arresta tutto
 		if utils.CompletionFlagExists() {
 			log.Println("[STANDBY] Computazione completata. Arresto sistema...")
 			shutdownAll()
