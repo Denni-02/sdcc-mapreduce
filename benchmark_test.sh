@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# ⚙️ Permessi iniziali
+# ermessi iniziali
 sudo chown -R $USER:$USER ./log ./output ./state
 sudo chmod -R u+w ./log ./output ./state
 
 # Parametri di benchmark
-MAPPERS_LIST=(2 4 8)
-REDUCERS_LIST=(2 4 8)
+MAPPERS_LIST=(8)
+REDUCERS_LIST=(8)
 COUNTS=(100 1000 5000 10000 20000)
 
 CONFIG_PATH="./config/config.json"
-RESULT_FILE="benchmark_results.csv"
+RESULT_FILE="benchmark_results2.csv"
 
 # CSV header
 echo "Mappers,Reducers,Count,Time(s)" > "$RESULT_FILE"
@@ -84,7 +84,7 @@ for M in "${MAPPERS_LIST[@]}"; do
 
       echo "Completato in ${DIFF}s"
 
-      # 🧹 Stop container per sicurezza
+      # Stop container per sicurezza
       docker-compose down --remove-orphans > /dev/null 2>&1
 
     done
