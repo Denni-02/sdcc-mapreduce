@@ -61,7 +61,7 @@ for M in "${MAPPERS_LIST[@]}"; do
 
         # Se dopo 15 secondi è ancora attivo, lo chiudo manualmente
         if kill -0 $RUN_PID 2>/dev/null; then
-          echo "⌛ run.sh ancora attivo dopo 15s, termino docker-compose forzatamente"
+          echo "run.sh ancora attivo dopo 15s, termino docker-compose forzatamente"
           pkill -f "docker-compose up"
           wait $RUN_PID
           STATUS=0
@@ -81,6 +81,7 @@ for M in "${MAPPERS_LIST[@]}"; do
       fi
 
       docker-compose down --remove-orphans > /dev/null 2>&1
+      docker system prune -af --volumes > /dev/null 2>&1
 
     done
   done
