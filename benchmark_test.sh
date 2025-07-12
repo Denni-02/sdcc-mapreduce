@@ -5,8 +5,8 @@ sudo chown -R $USER:$USER ./log ./output ./state
 sudo chmod -R u+w ./log ./output ./state
 
 # Parametri di benchmark
-MAPPERS_LIST=(8)
-REDUCERS_LIST=(8)
+MAPPERS_LIST=(2 4 8)
+REDUCERS_LIST=(2 4 8)
 COUNTS=(100 1000 5000 10000 20000)
 
 CONFIG_PATH="./config/config.json"
