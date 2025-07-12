@@ -182,6 +182,13 @@ func (m *Master) MapReducersToRanges(data []int) map[string][2]int {
 	ranges := createBalancedRanges(sample, numReducers)
 	log.Printf("ranges = %v\n", ranges)
 
+	// Protezione in caso ranges sia più corto
+	if len(ranges) < numReducers-1 {
+		log.Printf("Ranges troppo corti (%d), riduco numReducers a %d", len(ranges), len(ranges)+1)
+		numReducers = len(ranges) + 1
+		reducers = reducers[:numReducers]
+	}
+
 	for i, reducer := range reducers {
 		var lower, upper int
 		if i == 0 {
