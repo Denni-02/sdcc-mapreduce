@@ -62,11 +62,30 @@ func (m *Master) GenerateData(count, xi, xf int) []int {
 	source := rand.NewSource(time.Now().UnixNano())
 	random := rand.New(source)
 	data := make([]int, count)
+
+	// Crea cartella se non esiste
+	_ = os.MkdirAll("output", os.ModePerm)
+
+	// Crea file leggibile
+	txtFile, err := os.Create("output/data.txt")
+	if err != nil {
+		log.Printf("Errore creazione output/data.txt: %v", err)
+		return data
+	}
+	defer txtFile.Close()
+	writer := bufio.NewWriter(txtFile)
+
 	for i := range data {
 		data[i] = random.Intn(xf-xi+1) + xi
+		fmt.Fprintf(writer, "%d\n", data[i])
 	}
+
+	writer.Flush()
+	log.Println("Dati generati salvati anche in output/data.txt")
+
 	return data
 }
+
 
 // Divide la lista dei numeri in numMappers chunk, da assegnare ai mapper
 func (m *Master) SplitData(data []int) [][]int {

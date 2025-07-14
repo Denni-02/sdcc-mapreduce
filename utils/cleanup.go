@@ -27,6 +27,13 @@ func CleanupOutputFiles() {
 			log.Printf("Errore nella rimozione del file temporaneo %s: %v\n", tempFile, err)
 		}
 	}
+
+	dataFile := "output/data.txt"
+	if err := os.Remove(dataFile); err == nil {
+		log.Printf("File %s rimosso.\n", dataFile)
+	} else if !os.IsNotExist(err) {
+		log.Printf("Errore nella rimozione del file %s: %v\n", dataFile, err)
+	}
 }
 
 
