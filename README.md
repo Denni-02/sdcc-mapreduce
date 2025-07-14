@@ -15,10 +15,43 @@ Tutte le componenti sono containerizzate con **Docker** e orchestrate tramite **
 ### Per eseguire su EC2 (Learner Lab AWS):
 - Accesso a un **AWS Learner Lab**
 - Una **istanza EC2** attiva nel Lab
-- Docker e Docker Compose preinstallati nel Lab
+- Docker e Docker Compose installati nell'istanza
 - Una **chiave `.pem`** per la connessione SSH all’istanza
 
+## Guida creazione EC2 (se necessario)
 
+È possibile eseguire l’intero sistema in cloud su Amazon EC2, sfruttando gli strumenti offerti dal Learner Lab di AWS Academy.
+
+1. Accedere a AWS Academy (https://www.awsacademy.com/vforcesite/LMS_Login)
+2. Entra nel corso e clicca su Start Lab
+3. Clicca su AWS per aprire la console
+4. Crea EC2 andando in Servizi → EC2 → Launch Instance, per esempio io ho utilizzato i seguenti parametri:
+  * Name: sdcc-master
+  * AMI: Amazon Linux 2023 (64-bit x86)
+  * Tipo: t2.micro
+  * Key Pair: sdcc-key.pem (scaricala e conservala)
+  * Security Group 
+    - Regola 1: SSH (porta 22) da Anywhere 
+    - Regola 2: HTTP (porta 80) da Anywhere
+  * Avvia la macchina e copia l’indirizzo Public IPv4
+5. Collegati via SSH
+```bash
+mkdir -p ~/.ssh
+mv ~/Downloads/sdcc-key.pem ~/.ssh/
+chmod 400 ~/.ssh/sdcc-key.pem
+ssh -i ~/.ssh/sdcc-key.pem ec2-user@<IP_PUBBLICO>
+```
+6. Installa Docker e Docker Compose
+```bash
+sudo yum update -y
+sudo yum install -y docker git
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+newgrp docker
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose version
+```
 
 ## Come eseguire il progetto su un'istanza EC2
 
@@ -31,7 +64,7 @@ Tutte le componenti sono containerizzate con **Docker** e orchestrate tramite **
 
 ### 2. Connettersi all’istanza EC2
 
-Data la chiave `sdcc-key.pem` salvata in `~/.ssh` con permessi corretti, si si connette nel seguente modo:
+Data la chiave `sdcc-key.pem` salvata in `~/.ssh` con permessi corretti, ci si connette nel seguente modo:
 
 ```bash
 ssh -i ~/.ssh/sdcc-key.pem ec2-user@<IP_EC2>
@@ -50,6 +83,7 @@ Altrimenti:
 
 ```bash
 git clone https://github.com/Denni-02/sdcc-mapreduce.git
+cd sdcc-mapreduce
 ```
 
 ### 4. Impostare credenziali AWS
@@ -70,27 +104,44 @@ AWS_SECRET_ACCESS_KEY=...
 AWS_SESSION_TOKEN=...
 ```
 
+Se necessario rendilo eseguibile nel seguente modo:
+```bash
+chmod +x script/init_env.sh
+```
+
 ### 5. Modifica `config/config.json`
 
 Imposta i parametri del sistema:
-- `numMappers`: numero di mapper da avviare di default
-- `numReducers`: numero di reducer da avviare di default
 - `xi`, `xf`: range dei numeri generati (es. da 1 a 50)
 - `count`: quantità totale di numeri casuali da generare
 
 
 ### 6. Avvia il sistema completo
 
-Esegui il wrapper script run.sh con eventuali argomenti per specificare il numero di mapper e reducer:
+Esegui lo script run_EC2.sh con eventuali argomenti per specificare il numero di mapper e reducer (altrimenti parte con un numero di default definito in config.json):
 
 ```bash
 ./script/run_EC2.sh numMappers numReducer
+```
+Se necessario rendilo eseguibile nel seguente modo:
+```bash
+chmod +x script/run_EC2.sh
 ```
 
 ### 7. Verifica output
 
 - I reducer scrivono output parziale in `output/temp_<address>.txt`
 - Il master unisce tutto in `output/final_output.txt`
+
+E' possibile utilizzare gli script view_output.sh e view_master_log.sh:
+
+Se necessario rendilo eseguibile nel seguente modo:
+```bash
+chmod +x script/view_output.sh
+./script/view_output.sh
+chmod +x script/view_master_log.sh
+./script/view_master_log.sh
+```
 
 ## Strategia partizionamento
 
