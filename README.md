@@ -6,6 +6,8 @@ Il progetto implementa un sistema distribuito di ordinamento basato sul paradigm
 
 Tutte le componenti sono containerizzate con **Docker** e orchestrate tramite **Docker Compose**. Il sistema è eseguibile sia localmente, sia in cloud (EC2 AWS).
 
+--- 
+
 ## Requisiti
 
 ### Per l'esecuzione in locale:
@@ -18,40 +20,7 @@ Tutte le componenti sono containerizzate con **Docker** e orchestrate tramite **
 - Docker e Docker Compose installati nell'istanza
 - Una **chiave `.pem`** per la connessione SSH all’istanza
 
-## Guida creazione EC2 (se necessario)
-
-È possibile eseguire l’intero sistema in cloud su Amazon EC2, sfruttando gli strumenti offerti dal Learner Lab di AWS Academy.
-
-1. Accedere a AWS Academy (https://www.awsacademy.com/vforcesite/LMS_Login)
-2. Entra nel corso e clicca su Start Lab
-3. Clicca su AWS per aprire la console
-4. Crea EC2 andando in Servizi → EC2 → Launch Instance, per esempio io ho utilizzato i seguenti parametri:
-  * Name: sdcc-master
-  * AMI: Amazon Linux 2023 (64-bit x86)
-  * Tipo: t2.micro
-  * Key Pair: sdcc-key.pem (scaricala e conservala)
-  * Security Group 
-    - Regola 1: SSH (porta 22) da Anywhere 
-    - Regola 2: HTTP (porta 80) da Anywhere
-  * Avvia la macchina e copia l’indirizzo Public IPv4
-5. Collegati via SSH
-```bash
-mkdir -p ~/.ssh
-mv ~/Downloads/sdcc-key.pem ~/.ssh/
-chmod 400 ~/.ssh/sdcc-key.pem
-ssh -i ~/.ssh/sdcc-key.pem ec2-user@<IP_PUBBLICO>
-```
-6. Installa Docker e Docker Compose
-```bash
-sudo yum update -y
-sudo yum install -y docker git
-sudo service docker start
-sudo usermod -a -G docker ec2-user
-newgrp docker
-sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose version
-```
+---
 
 ## Come eseguire il progetto su un'istanza EC2
 
@@ -142,13 +111,78 @@ chmod +x script/view_output.sh
 chmod +x script/view_master_log.sh
 ./script/view_master_log.sh
 ```
+---
 
 ## Strategia partizionamento
 
 - Per bilanciare il carico tra i reducer il master esegue un sampling del 10% del dataset (per evitare di gestire troppi dati e annullare i benefici del map/reduce)
 - Il sample viene ordinato e si estraggono N-1 cut point equidistanti nel sample per generare N intervalli
 
-## Autore
+--- 
+
+## Guida creazione EC2 (se necessario)
+
+È possibile eseguire l’intero sistema in cloud su Amazon EC2, sfruttando gli strumenti offerti dal Learner Lab di AWS Academy.
+
+1. Accedere a AWS Academy (https://www.awsacademy.com/vforcesite/LMS_Login)
+2. Entra nel corso e clicca su Start Lab
+3. Clicca su AWS per aprire la console
+4. Crea EC2 andando in Servizi → EC2 → Launch Instance, per esempio io ho utilizzato i seguenti parametri:
+  * Name: sdcc-master
+  * AMI: Amazon Linux 2023 (64-bit x86)
+  * Tipo: t2.micro
+  * Key Pair: sdcc-key.pem (scaricala e conservala)
+  * Security Group 
+    - Regola 1: SSH (porta 22) da Anywhere 
+    - Regola 2: HTTP (porta 80) da Anywhere
+  * Avvia la macchina e copia l’indirizzo Public IPv4
+6. Sposta chiave nella directory .ssh
+5. Collegati via SSH
+```bash
+chmod 400 ~/.ssh/sdcc-key.pem
+ssh -i ~/.ssh/sdcc-key.pem ec2-user@<IP_PUBBLICO>
+```
+6. Installa Docker e Docker Compose
+```bash
+sudo yum update -y
+sudo yum install -y docker git
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+newgrp docker
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose version
+```
+
+## Guida creazione bucket S3 (se necessario)
+1. Vai su: Services → S3 → Create bucket
+2. Per esempio inserisci i seguenti valori:
+   * Bucket name: sdcc-mapreduce-recovery
+   * Region: lasciarla di default (es: us-east-1)
+   * ACLs enabled 
+   * Block all public access: deseleziona tutte le opzioni
+   * Conferma cliccando su Create bucket
+   * Vai in Permissions → Bucket policy e inserisci
+
+```bash
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowPublicAll",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::sdcc-mapreduce-recovery/*"
+    }
+  ]
+}
+
+```
+
+--- 
+
+# Autore
 
 Mariani Dennis
 Università di Roma Tor Vergata
